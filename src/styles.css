@@ -4,6 +4,10 @@
   @apply flex bg-white hover:bg-gray-100 transition rounded-lg border border-gray-300 cursor-pointer;
 }
 
+.btn[disabled] {
+  @apply cursor-not-allowed disabled:bg-gray-400 text-white;
+}
+
 .btn-dismiss {
   @apply flex bg-red-500 hover:bg-red-600 text-white transition rounded-lg border border-gray-300 cursor-pointer;
 }
