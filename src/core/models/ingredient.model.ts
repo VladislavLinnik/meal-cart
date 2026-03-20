@@ -8,6 +8,7 @@ export interface Ingredient {
 
 export const UNIT_MEASUREMENT = {
   Kg: 'кг',
+  Gr: 'г',
   Lt: 'л',
   Ml: 'мл',
   Piece: 'шт',
