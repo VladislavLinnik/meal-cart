@@ -1,0 +1,59 @@
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-lg font-bold">{{ isEditMode ? 'Змінити страву' : 'Нова страва' }}</h2>
+  <button class="btn px-2 py-1 items-center"
+          routerLink="/meals">
+    <ng-icon class="mr-2" name="heroArrowLeft" />
+    Назад до страв
+  </button>
+</div>
+
+<form [formGroup]="form">
+  <label for="mealName" class="block mb-2 cursor-pointer">Назва страви</label>
+  <input id="mealName" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 mb-5"
+         type="text" placeholder="Введіть назву страви..."
+         formControlName="name">
+
+  <h3 class="text-lg mb-2">Інгредієнти</h3>
+  <div formArrayName="ingredients">
+    @for (group of ingredients.controls; track group) {
+      <div class="grid grid-cols-[2fr_1fr_1fr] gap-3 mb-3"
+           [ngClass]="{'grid-cols-[2fr_1fr_1fr_auto]': ingredients.controls.length > 1}"
+           [formGroup]="asGroup(group)">
+        <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+               formControlName="name"
+               type="text" placeholder="Інгредієнт" maxlength="50">
+        <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+               formControlName="amount"
+               type="number" inputmode="numeric" pattern="[0-9]*" min="0"
+               placeholder="Кількість">
+        <select class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+                formControlName="unit">
+          @for (unit of units; track unit.key) {
+            <option [value]="unit.key">{{ unit.value }}</option>
+          }
+        </select>
+        @if (ingredients.controls.length > 1) {
+          <button class="btn-dismiss border-none size-8 flex justify-center items-center"
+                  type="button"
+                  (click)="removeIngredient($index)">
+            <ng-icon class="rotate-45" name="heroPlus"></ng-icon>
+          </button>
+        }
+      </div>
+    }
+  </div>
+  <button class="btn items-center py-1 px-2 mb-5"
+          type="button"
+          (click)="addIngredient()">
+    <ng-icon name="heroPlus"></ng-icon>
+    Інгредієнт
+  </button>
+</form>
+
+<div class="flex justify-end gap-4">
+  <button class="btn-dismiss py-1 px-2"
+          routerLink="/meals">Скасувати</button>
+  <button class="btn text-white bg-blue-500! disabled:cursor-not-allowed! disabled:bg-gray-400! hover:bg-blue-600! py-1 px-2"
+          [disabled]="form.invalid"
+          (click)="save()">{{ isEditMode ? 'Зберегти' : 'Додати' }}</button>
+</div>

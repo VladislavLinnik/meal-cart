@@ -1,0 +1,3 @@
+@reference "tailwindcss";
+
+:host { @apply block min-h-screen bg-amber-50/70; }

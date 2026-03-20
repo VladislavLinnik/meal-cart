@@ -1,0 +1,34 @@
+<div class="flex items-center justify-between mb-5">
+  <h2 class="text-lg font-bold">Список покупок</h2>
+  <button class="btn items-center py-1 px-3"
+          (click)="changeViewSelected.emit(CART_PAGE_VIEW.Meals)">
+    <ng-icon class="mr-1" name="heroArrowLeft" />
+    Страви
+  </button>
+</div>
+
+<app-cart-progress [progress]="50" class="block mb-5">
+  <div class="flex justify-between items-center mb-1 text-sm">
+    <span>Прогрес</span>
+    <span><span class="font-bold">5/12</span> придбано</span>
+  </div>
+</app-cart-progress>
+
+<ul>
+  <li class="flex py-4 not-last:border-b border-b-gray-300">
+    <input class="mr-3 mt-1 accent-green-400 size-5 text-white cursor-pointer" type="checkbox">
+    <div class="flex flex-col">
+      <span>Яйця</span>
+      <span class="text-sm text-gray-500">Борщ x2, яєчня х3</span>
+    </div>
+    <span class="ml-auto text-gray-500">5 шт</span>
+  </li>
+  <li class="flex py-4 not-last:border-b border-b-gray-300">
+    <input class="mr-3 mt-1 accent-green-400 size-5 text-white cursor-pointer" type="checkbox">
+    <div class="flex flex-col">
+      <span>Свинина</span>
+      <span class="text-sm text-gray-500">Борщ x1</span>
+    </div>
+    <span class="ml-auto text-green-400">500 кг</span>
+  </li>
+</ul>

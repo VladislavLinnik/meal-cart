@@ -1,0 +1,11 @@
+<div class="xl:w-1/2 mx-auto">
+  @if (pageView() === CART_PAGE_VIEW.Meals) {
+    <app-cart-meals-list
+      (changeViewSelected)="changePageView($event)" />
+  }
+
+  @if (pageView() === CART_PAGE_VIEW.Ingredients) {
+    <app-cart-ingredients-list
+      (changeViewSelected)="changePageView($event)" />
+  }
+</div>
