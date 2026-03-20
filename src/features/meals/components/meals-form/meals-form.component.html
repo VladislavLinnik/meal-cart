@@ -24,7 +24,7 @@
                type="text" placeholder="Інгредієнт" maxlength="50">
         <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                formControlName="amount"
-               type="number" inputmode="numeric" pattern="[0-9]*" min="0"
+               type="number" inputmode="numeric" pattern="[0-9]+([.,][0-9]+)?" min="0"
                placeholder="Кількість">
         <select class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
                 formControlName="unit">
