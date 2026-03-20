@@ -17,6 +17,8 @@ import {
   Subject,
 } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { CartService } from '../../../../core/services/cart.service';
+import { CartMeal } from '../../../../core/models/cart.model';
 
 @Component({
   selector: 'app-meals-list',
@@ -28,25 +30,25 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class MealsListComponent {
   private readonly mealsService = inject(MealsService);
+  private readonly cartService = inject(CartService);
   readonly meals: Signal<Meal[]> = this.mealsService.meals;
+  readonly cart: Signal<CartMeal[]> = this.cartService.cart;
   private readonly searchSubject = new Subject<string>();
 
   filteredMeals = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
     if (!query) return this.mealsService.meals();
 
-    return this.meals()
-      .filter((meal) => meal.name.toLowerCase().includes(query));
+    return this.meals().filter((meal) => meal.name.toLowerCase().includes(query));
   });
 
-  searchQuery = toSignal(
-    this.searchSubject
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      ),
-    { initialValue: '' },
-  );
+  cartMealIds: Signal<Set<string>> = computed(() => {
+    return new Set(this.cart().map((meal: Meal) => meal.id));
+  });
+
+  searchQuery = toSignal(this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()), {
+    initialValue: '',
+  });
 
   onSearch(value: string): void {
     this.searchSubject.next(value);
@@ -54,5 +56,14 @@ export class MealsListComponent {
 
   remove(id: string): void {
     this.mealsService.removeMeal(id);
+    this.cartService.removeMeal(id);
   }
+
+  addToCart(meal: Meal): void {
+    this.cartService.addMeal(meal);
+  }
+
+  removeFromCart(id: string): void {
+    this.cartService.removeMeal(id);
+  };
 }

@@ -1,36 +1,54 @@
 <div class="flex items-center justify-between mb-5">
   <h2 class="text-lg font-bold">Кошик</h2>
-  <button class="btn-dismiss items-center py-1 px-3">
-    Очистити
-  </button>
+  @if (cart().length) {
+    <button class="btn-dismiss items-center py-1 px-3"
+            (click)="removeAll()">
+      Очистити
+    </button>
+  }
 </div>
 
-<h3 class="text-lg mb-2">Страви</h3>
-<ul class="flex flex-col gap-3 mb-10">
-  <li class="w-full flex justify-between rounded-xl bg-amber-100 border border-amber-200 p-3">
-    <div class="flex flex-col gap-y-0.5">
-      <h4 class="font-medium">Борщ</h4>
-      <span class="text-sm text-gray-500">7 інгредієнтів</span>
-    </div>
-    <div class="flex items-center gap-5">
-      <div class="flex items-center gap-2">
-        <button class="btn border-none size-8 flex justify-center items-center">
-          <ng-icon name="heroMinus"></ng-icon>
-        </button>
-        <span class="font-bold">2</span>
-        <button class="btn border-none size-8 flex justify-center items-center">
-          <ng-icon name="heroPlus"></ng-icon>
-        </button>
-      </div>
-      <button class="btn-dismiss border-none size-8 flex justify-center items-center">
-        <ng-icon name="heroTrash"></ng-icon>
-      </button>
-    </div>
-  </li>
-</ul>
+@if (cart().length) {
+  <h3 class="text-lg mb-2">Страви</h3>
+  <ul class="flex flex-col gap-3 mb-10">
+    @for (meal of cart(); track meal.id) {
+      <li class="w-full flex justify-between rounded-xl bg-amber-100 border border-amber-200 p-3">
+        <div class="flex flex-col gap-y-0.5">
+          <h4 class="font-medium first-letter:uppercase">{{ meal.name }}</h4>
+          <span class="text-sm text-gray-500">{{ meal.ingredients.length | i18nPlural: pluralMap }}</span>
+        </div>
+        <div class="flex items-center gap-5">
+          <div class="flex items-center gap-2">
+            <button class="btn border-none size-8 flex justify-center items-center"
+                    (click)="updateQuantity(meal.id, -1)">
+              <ng-icon name="heroMinus"></ng-icon>
+            </button>
+            <span class="font-bold">{{ meal.quantity }}</span>
+            <button class="btn border-none size-8 flex justify-center items-center"
+                    (click)="updateQuantity(meal.id, 1)">
+              <ng-icon name="heroPlus"></ng-icon>
+            </button>
+          </div>
+          <button class="btn-dismiss border-none size-8 flex justify-center items-center"
+                  (click)="removeFromCart(meal.id)">
+            <ng-icon name="heroTrash"></ng-icon>
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
 
-<button class="btn w-full justify-center items-center py-1 px-3"
-        (click)="changeViewSelected.emit(CART_PAGE_VIEW.Ingredients)">
-  Перейти до списку покупок
-  <ng-icon class="ml-1" name="heroArrowRight" />
-</button>
+  <button class="btn w-full justify-center items-center py-1 px-3"
+          (click)="changeViewSelected.emit(CART_PAGE_VIEW.Ingredients)">
+    Перейти до списку покупок
+    <ng-icon class="ml-1" name="heroArrowRight" />
+  </button>
+
+} @else {
+  <p class="text-center text-gray-500 text-sm mb-2">Немає доданих страв</p>
+  <button class="mx-auto btn items-center py-1 px-3"
+          routerLink="meals">
+    <ng-icon class="mr-1" name="heroPlus" />
+    Додати
+  </button>
+}

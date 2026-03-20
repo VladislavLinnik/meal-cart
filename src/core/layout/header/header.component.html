@@ -12,8 +12,8 @@
            routerLinkActive="bg-gray-200"
            class="text-cyan-700 hover:bg-gray-200 focus:bg-gray-200 p-2 rounded cursor-pointer">
           Кошик
-          @if (mealsService.totalMeals()) {
-            <span class="ml-1 inline-flex items-center justify-center rounded-full bg-green-500 text-white size-6 text-xs">{{ mealsService.totalMeals() }}</span>
+          @if (cartService.totalMealsInCart()) {
+            <span class="ml-1 inline-flex items-center justify-center rounded-full bg-green-500 text-white size-6 text-xs">{{ cartService.totalMealsInCart() }}</span>
           }
         </a>
       </li>

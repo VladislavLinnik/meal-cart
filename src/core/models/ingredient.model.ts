@@ -12,6 +12,7 @@ export const UNIT_MEASUREMENT = {
   Lt: 'л',
   Ml: 'мл',
   Piece: 'шт',
+  Pack: 'уп',
 } as const;
 
 export type UnitMeasurement = ValueOf<typeof UNIT_MEASUREMENT>;

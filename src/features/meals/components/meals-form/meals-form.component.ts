@@ -14,6 +14,7 @@ import { KeyValue, NgClass } from '@angular/common';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Meal } from '../../../../core/models/meals.model';
 import { asGroup } from '../../../../core/utils/form.helper';
+import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-meals-form',
@@ -28,6 +29,7 @@ export class MealsFormComponent implements OnInit {
 
   private readonly router = inject(Router);
   private readonly mealsService = inject(MealsService);
+  private readonly cartService = inject(CartService);
   private readonly fb = inject(FormBuilder);
 
   readonly asGroup = asGroup;
@@ -68,6 +70,7 @@ export class MealsFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.mealsService.updateMeal(this.id()!, this.form.getRawValue() as Partial<Meal>);
+      this.cartService.updateMeal(this.id()!, this.form.getRawValue() as Partial<Meal>);
       void this.router.navigate(['meals']);
     } else {
       this.mealsService.addMeal(this.form.getRawValue() as Omit<Meal, 'id'>);

@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 import { UNIT_MEASUREMENT, UnitMeasurement } from '../models/ingredient.model';
 import { KeyValue } from '@angular/common';
@@ -14,23 +14,21 @@ export class MealsService {
   private _meals = signal<Meal[]>([]);
   readonly meals = this._meals.asReadonly();
 
-  readonly totalMeals = computed(() => this._meals().length);
-
   constructor() {
-    this.loadMeals();
+    this.load();
   }
 
   addMeal(meal: Omit<Meal, 'id'>): void {
     const payload: Meal = { ...meal, id: crypto.randomUUID() };
     this._meals.update((meals) => [...meals, payload]);
-    this.saveMeals();
+    this.saveToStorage();
   }
 
   updateMeal(id: string, meal: Partial<Meal>): void {
     this._meals.update((meals) => {
       return meals.map((m) => (m.id === id ? { ...m, ...meal } : m));
     });
-    this.saveMeals();
+    this.saveToStorage();
   }
 
   getMeal(id: string): Meal | undefined {
@@ -39,7 +37,7 @@ export class MealsService {
 
   removeMeal(id: string): void {
     this._meals.update((meals) => meals.filter((meal) => meal.id !== id));
-    this.saveMeals();
+    this.saveToStorage();
   }
 
   getUnitMeasurements(): KeyValue<string, UnitMeasurement>[] {
@@ -49,11 +47,11 @@ export class MealsService {
     }));
   }
 
-  private saveMeals(): void {
+  private saveToStorage(): void {
     this.storageService.set(STORAGE_KEY.Meals, this._meals());
   }
 
-  private loadMeals(): void {
+  private load(): void {
     const stored = this.storageService.get<Meal[]>(STORAGE_KEY.Meals);
     this._meals.set(stored ? stored : []);
   }

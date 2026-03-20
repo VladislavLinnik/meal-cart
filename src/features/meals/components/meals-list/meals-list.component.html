@@ -3,7 +3,7 @@
   <button class="btn items-center py-1 px-3"
           routerLink="new">
     <ng-icon class="mr-1" name="heroPlus" />
-    Додати
+    Створити
   </button>
 </div>
 
@@ -12,31 +12,38 @@
          (input)="onSearch($any($event.target).value)"
          placeholder="Пошук страви...">
 } @else {
-  <p class="text-center text-gray-500 text-sm mb-2">Создайте блюдо чтобы начать</p>
+  <p class="text-center text-gray-500 text-sm mb-2">Створіть страву, щоб розпочати</p>
   <button class="mx-auto btn items-center py-1 px-3"
           routerLink="new">
     <ng-icon class="mr-1" name="heroPlus" />
-    Создать
+    Створити
   </button>
 }
 
 @for (meal of filteredMeals(); track meal.id) {
   <section class="p-3 border bg-white border-gray-300 mb-3 rounded-xl">
     <div class="mb-2 flex justify-between">
-      <h3 class="font-normal">{{ meal.name }}</h3>
+      <h3 class="first-letter:uppercase text-lg">{{ meal.name }}</h3>
       <div class="flex justify-between items-center gap-3">
         <button class="btn size-6 flex justify-center items-center"
                 [routerLink]="[meal.id]">
           <ng-icon name="heroPencil" />
         </button>
-        <button class="btn size-6 flex justify-center items-center"
+        <button class="btn-dismiss size-6 flex justify-center items-center"
                 (click)="remove(meal.id)">
           <ng-icon name="heroTrash" />
         </button>
-        <button class="btn px-3">
-          Додати до кошика
-        </button>
-        <div class="bg-green-100 text-green-700 border border-gray-300 rounded py-0.5 px-2">у кошику</div>
+        @if(!cartMealIds().has(meal.id)) {
+          <button class="btn px-3"
+                  (click)="addToCart(meal)">
+            Додати до кошика
+          </button>
+        } @else {
+          <button class="btn px-3"
+                  (click)="removeFromCart(meal.id)">
+            Видалити з кошика
+          </button>
+        }
       </div>
     </div>
     <div class="flex flex-wrap gap-3">
