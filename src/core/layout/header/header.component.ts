@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MealsService } from '../../services/meals.service';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  readonly mealsService = inject(MealsService);
+}
