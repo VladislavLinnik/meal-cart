@@ -12,12 +12,14 @@ import { heroArrowLeft } from '@ng-icons/heroicons/outline';
 import { CartProgress } from '../cart-progress/cart-progress';
 import { CartMeal } from '../../../../core/models/cart.model';
 import { CartService } from '../../../../core/services/cart.service';
-import { Ingredient } from '../../../../core/models/ingredient.model';
+import { Ingredient, UNIT_MEASUREMENT } from '../../../../core/models/ingredient.model';
 import { NgClass } from '@angular/common';
+import { FormatIngredientSourcesPipe } from '../../pipes/format-ingredient-sources.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart-ingredients-list',
-  imports: [NgIcon, CartProgress, NgClass],
+  imports: [NgIcon, CartProgress, NgClass, FormatIngredientSourcesPipe, RouterLink],
   viewProviders: [provideIcons({ heroArrowLeft })],
   templateUrl: './cart-ingredients-list.html',
   standalone: true,
@@ -29,6 +31,7 @@ export class CartIngredientsList {
   readonly cart: Signal<CartMeal[]> = this.cartService.cart;
 
   readonly CART_PAGE_VIEW = CART_PAGE_VIEW;
+  readonly UNIT_MEASUREMENT = UNIT_MEASUREMENT;
 
   readonly progress = computed(() => {
     const items = this.ingredients();
@@ -40,17 +43,20 @@ export class CartIngredientsList {
     };
   });
 
-  readonly ingredients = computed(() => {
+  readonly ingredients = computed<Ingredient[]>(() => {
     const map = new Map<string, Ingredient>();
 
     for (const meal of this.cart()) {
       for (const ingredient of meal.ingredients) {
         const key = `${ingredient.name}_${ingredient.unit}`;
+        const existing = map.get(key);
+        const newSource = { mealName: meal.name, quantity: meal.quantity };
 
         map.set(key, {
           ...ingredient,
-          amount: (map.get(key)?.amount ?? 0) + ingredient.amount,
+          amount: ((existing?.amount ?? 0) + ingredient.amount) * meal.quantity,
           selected: ingredient.selected,
+          sources: existing ? [...existing.sources!, newSource] : [newSource],
         });
       }
     }

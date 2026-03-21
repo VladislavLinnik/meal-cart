@@ -1,32 +1,44 @@
 <div class="flex items-center justify-between mb-5">
   <h2 class="text-lg font-bold">Список покупок</h2>
-  <button class="btn items-center py-1 px-3"
-          (click)="changeViewSelected.emit(CART_PAGE_VIEW.Meals)">
-    <ng-icon class="mr-1" name="heroArrowLeft" />
-    Страви
-  </button>
+  @if (cart().length) {
+    <button class="btn items-center py-1 px-3"
+            (click)="changeViewSelected.emit(CART_PAGE_VIEW.Meals)">
+      <ng-icon class="mr-1" name="heroArrowLeft" />
+      Страви
+    </button>
+  }
 </div>
 
-<app-cart-progress [percent]="progress().percent" class="block mb-5">
-  <div class="flex justify-between items-center mb-1 text-sm">
-    <span>Прогрес</span>
-    <span><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span> придбано</span>
-  </div>
-</app-cart-progress>
+@if (cart().length) {
+  <app-cart-progress [percent]="progress().percent" class="block mb-5">
+    <div class="flex justify-between items-center mb-1 text-sm">
+      <span>Прогрес</span>
+      <span><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span> придбано</span>
+    </div>
+  </app-cart-progress>
 
-<ul>
-  @for (item of ingredients(); track item.name) {
-    <li class="flex py-4 not-last:border-b border-b-gray-300 cursor-pointer"
-        (click)="toggleIngredient(item)">
-      <input class="mr-3 mt-1 pointer-events-none accent-green-400 size-5 text-white"
-             type="checkbox"
-             [checked]="item.selected">
-      <div class="flex flex-col mr-2">
-        <span class="first-letter:uppercase"
-              [ngClass]="{'line-through text-gray-500': item.selected}">{{ item.name }}</span>
-      </div>
-      <span class="ml-auto"
-            [ngClass]="item.selected ? 'text-gray-500': 'text-green-500'">{{ item.amount }} {{ item.unit }}</span>
-    </li>
-  }
-</ul>
+  <ul>
+    @for (item of ingredients(); track item.name) {
+      <li class="flex py-4 not-last:border-b border-b-gray-300 cursor-pointer"
+          (click)="toggleIngredient(item)">
+        <input class="mr-3 mt-1 pointer-events-none accent-green-400 size-5 text-white"
+               type="checkbox"
+               [checked]="item.selected">
+        <div class="flex flex-col mr-2">
+          <span class="first-letter:uppercase"
+                [ngClass]="{'line-through text-gray-500': item.selected}">{{ item.name }}</span>
+          <span class="text-sm text-gray-500">{{ item.sources | appFormatIngredientSources }}</span>
+        </div>
+        <span class="ml-auto"
+              [ngClass]="item.selected ? 'text-gray-500': 'text-green-500'">{{ item.amount }} {{ UNIT_MEASUREMENT[item.unit] }}</span>
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="text-center text-gray-500 text-sm mb-2">Немає доданих страв</p>
+  <button class="mx-auto btn items-center py-1 px-3"
+          routerLink="meals">
+    <ng-icon class="mr-1" name="heroPlus" />
+    Додати
+  </button>
+}

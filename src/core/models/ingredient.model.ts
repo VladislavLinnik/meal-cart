@@ -5,6 +5,12 @@ export interface Ingredient {
   amount: number;
   unit: keyof typeof UNIT_MEASUREMENT;
   selected?: boolean;
+  sources?: IngredientSources[];
+}
+
+export interface IngredientSources {
+  mealName: string;
+  quantity: number;
 }
 
 export const UNIT_MEASUREMENT = {
