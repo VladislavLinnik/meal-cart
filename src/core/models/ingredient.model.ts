@@ -4,6 +4,7 @@ export interface Ingredient {
   name: string;
   amount: number;
   unit: keyof typeof UNIT_MEASUREMENT;
+  selected?: boolean;
 }
 
 export const UNIT_MEASUREMENT = {

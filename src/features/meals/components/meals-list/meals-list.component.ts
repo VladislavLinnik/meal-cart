@@ -35,20 +35,23 @@ export class MealsListComponent {
   readonly cart: Signal<CartMeal[]> = this.cartService.cart;
   private readonly searchSubject = new Subject<string>();
 
-  filteredMeals = computed(() => {
+  readonly filteredMeals = computed<Meal[]>(() => {
     const query = this.searchQuery().toLowerCase().trim();
     if (!query) return this.mealsService.meals();
 
     return this.meals().filter((meal) => meal.name.toLowerCase().includes(query));
   });
 
-  cartMealIds: Signal<Set<string>> = computed(() => {
+  readonly cartMealIds = computed<Set<string>>(() => {
     return new Set(this.cart().map((meal: Meal) => meal.id));
   });
 
-  searchQuery = toSignal(this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()), {
-    initialValue: '',
-  });
+  readonly searchQuery = toSignal(
+    this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()),
+    {
+      initialValue: '',
+    },
+  );
 
   onSearch(value: string): void {
     this.searchSubject.next(value);
@@ -65,5 +68,5 @@ export class MealsListComponent {
 
   removeFromCart(id: string): void {
     this.cartService.removeMeal(id);
-  };
+  }
 }

@@ -3,6 +3,7 @@ import { StorageService } from './storage.service';
 import { CartMeal } from '../models/cart.model';
 import { Meal } from '../models/meals.model';
 import { STORAGE_KEY } from '../models/storage.model';
+import { Ingredient } from '../models/ingredient.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,21 @@ export class CartService {
     this._cart.update((meals) =>
       meals.map((m) => (m.id === id ? { ...m, quantity: Math.max(m.quantity + step, 1) } : m)),
     );
+    this.saveToStorage();
+  }
+
+  updateSelectedIngredient(ingredient: Ingredient): void {
+    const key = `${ingredient.name}_${ingredient.unit}`;
+
+    this._cart.update((cart) =>
+      cart.map((meal) => ({
+        ...meal,
+        ingredients: meal.ingredients.map((ing) =>
+          `${ing.name}_${ing.unit}` === key ? { ...ing, selected: !ing.selected } : ing,
+        ),
+      })),
+    );
+
     this.saveToStorage();
   }
 

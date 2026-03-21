@@ -7,28 +7,26 @@
   </button>
 </div>
 
-<app-cart-progress [progress]="50" class="block mb-5">
+<app-cart-progress [percent]="progress().percent" class="block mb-5">
   <div class="flex justify-between items-center mb-1 text-sm">
     <span>Прогрес</span>
-    <span><span class="font-bold">5/12</span> придбано</span>
+    <span><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span> придбано</span>
   </div>
 </app-cart-progress>
 
 <ul>
-  <li class="flex py-4 not-last:border-b border-b-gray-300">
-    <input class="mr-3 mt-1 accent-green-400 size-5 text-white cursor-pointer" type="checkbox">
-    <div class="flex flex-col">
-      <span>Яйця</span>
-      <span class="text-sm text-gray-500">Борщ x2, яєчня х3</span>
-    </div>
-    <span class="ml-auto text-gray-500">5 шт</span>
-  </li>
-  <li class="flex py-4 not-last:border-b border-b-gray-300">
-    <input class="mr-3 mt-1 accent-green-400 size-5 text-white cursor-pointer" type="checkbox">
-    <div class="flex flex-col">
-      <span>Свинина</span>
-      <span class="text-sm text-gray-500">Борщ x1</span>
-    </div>
-    <span class="ml-auto text-green-400">500 кг</span>
-  </li>
+  @for (item of ingredients(); track item.name) {
+    <li class="flex py-4 not-last:border-b border-b-gray-300 cursor-pointer"
+        (click)="toggleIngredient(item)">
+      <input class="mr-3 mt-1 pointer-events-none accent-green-400 size-5 text-white"
+             type="checkbox"
+             [checked]="item.selected">
+      <div class="flex flex-col mr-2">
+        <span class="first-letter:uppercase"
+              [ngClass]="{'line-through text-gray-500': item.selected}">{{ item.name }}</span>
+      </div>
+      <span class="ml-auto"
+            [ngClass]="item.selected ? 'text-gray-500': 'text-green-500'">{{ item.amount }} {{ item.unit }}</span>
+    </li>
+  }
 </ul>

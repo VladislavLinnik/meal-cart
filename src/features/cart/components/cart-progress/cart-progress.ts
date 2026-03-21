@@ -9,9 +9,9 @@ import { NgStyle } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartProgress {
-  readonly progress = input.required<number>();
+  readonly percent = input.required<number>();
 
   readonly widthStyle = computed(() => ({
-    width: Math.min(100, Math.max(0, this.progress())) + '%',
+    width: Math.min(100, Math.max(0, this.percent())) + '%',
   }));
 }
