@@ -8,30 +8,53 @@
 </div>
 
 <form [formGroup]="form">
-  <label for="dishName" class="block mb-2 cursor-pointer">Назва страви</label>
-  <input id="dishName" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 mb-5"
-         type="text" placeholder="Введіть назву страви..."
-         formControlName="name">
+  <div class="mb-5">
+    <label for="dishName" class="block mb-2 cursor-pointer">Назва страви</label>
+    <input id="dishName" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+           type="text" placeholder="Введіть назву страви..."
+           formControlName="name">
+    <app-form-errors [field]="form.get('name')">
+      <app-form-error type="required" message="Введіть назву страви" />
+      <app-form-error type="minlength" message="Мінімум 2 символа" />
+    </app-form-errors>
+  </div>
 
   <h3 class="text-lg mb-2">Інгредієнти</h3>
   <div formArrayName="ingredients">
     @for (group of ingredients.controls; track $index) {
-      <div class="grid grid-cols-[2fr_1fr_1fr] gap-3 mb-3"
+      <div class="grid grid-cols-[2fr_1fr_1fr] items-start gap-3 mb-3"
            [ngClass]="{'grid-cols-[2fr_1fr_1fr_auto]': ingredients.controls.length > 1}"
            [formGroup]="asGroup(group)">
-        <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
-               formControlName="name"
-               type="text" placeholder="Інгредієнт" maxlength="50">
-        <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-               formControlName="amount"
-               type="number" inputmode="decimal" pattern="[0-9]+([.,][0-9]+)?" min="0"
-               placeholder="Кількість">
-        <select class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
-                formControlName="unit">
-          @for (unit of units; track unit.key) {
-            <option [value]="unit.key">{{ unit.value }}</option>
-          }
-        </select>
+        <div>
+          <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+                 formControlName="name"
+                 type="text" placeholder="Інгредієнт" maxlength="50">
+          <app-form-errors [field]="asGroup(group).get('name')">
+            <app-form-error type="required" message="Введіть назву інгрідієнта" />
+            <app-form-error type="maxlength" message="Максимум 50 символів" />
+          </app-form-errors>
+        </div>
+        <div>
+          <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                 formControlName="amount"
+                 type="number" inputmode="decimal" pattern="[0-9]+([.,][0-9]+)?" min="0"
+                 placeholder="Кількість">
+          <app-form-errors [field]="asGroup(group).get('amount')">
+            <app-form-error type="required" message="Введіть кількість" />
+            <app-form-error type="pattern" message="Значення повинно бути числом" />
+          </app-form-errors>
+        </div>
+        <div>
+          <select class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+                  formControlName="unit">
+            @for (unit of units; track unit.key) {
+              <option [value]="unit.key">{{ unit.value }}</option>
+            }
+          </select>
+          <app-form-errors [field]="asGroup(group).get('unit')">
+            <app-form-error type="required" message="Виберіть міру" />
+          </app-form-errors>
+        </div>
         @if (ingredients.controls.length > 1) {
           <button class="btn-dismiss border-none size-8 flex justify-center items-center"
                   type="button"

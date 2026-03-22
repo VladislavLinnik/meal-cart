@@ -8,10 +8,19 @@ import { KeyValue, NgClass } from '@angular/common';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dish } from '../../../../core/models/dish.model';
 import { asGroup } from '../../../../core/utils/form.helper';
+import { FormErrorsComponent } from '../../../../shared/components/form-errors/form-errors.component';
+import { FormErrorComponent } from '../../../../shared/components/form-error/form-error.component';
 
 @Component({
   selector: 'app-dish-form',
-  imports: [NgIcon, RouterLink, ReactiveFormsModule, NgClass],
+  imports: [
+    NgIcon,
+    RouterLink,
+    ReactiveFormsModule,
+    NgClass,
+    FormErrorsComponent,
+    FormErrorComponent,
+  ],
   viewProviders: [provideIcons({ heroArrowLeft, heroPlus })],
   templateUrl: './dish-form.component.html',
   standalone: true,
@@ -27,7 +36,7 @@ export class DishFormComponent implements OnInit {
   readonly asGroup = asGroup;
   readonly units: KeyValue<string, UnitMeasurement>[] = this.dishService.getUnitMeasurements();
   form = this.fb.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(2)]],
     ingredients: this.fb.array([]),
   });
 

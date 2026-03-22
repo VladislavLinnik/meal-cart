@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FormErrorsComponent } from './form-errors.component';
+
+describe('FormErrors', () => {
+  let component: FormErrorsComponent;
+  let fixture: ComponentFixture<FormErrorsComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FormErrorsComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(FormErrorsComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
