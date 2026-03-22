@@ -1,7 +1,7 @@
 <section class="p-3 border bg-white border-gray-300 mb-3 rounded-xl">
   <div class="mb-2 flex justify-between">
-    <h3 class="first-letter:uppercase text-lg">{{ dish().name }}</h3>
-    <div class="flex justify-between items-center gap-3">
+    <h3 class="first-letter:uppercase text-lg mr-2">{{ dish().name }}</h3>
+    <div class="flex justify-between items-start gap-3">
       <button class="btn size-6 flex justify-center items-center"
               [routerLink]="[dish().id]">
         <ng-icon name="heroPencil" />
@@ -12,14 +12,14 @@
       </button>
 
       @if(!isInCart()) {
-        <button class="btn px-3"
+        <button class="btn size-6 flex justify-center items-center"
                 (click)="addToCart.emit(dish())">
-          Додати до кошика
+          <ng-icon name="heroShoppingCart" />
         </button>
       } @else {
-        <button class="btn px-3"
+        <button class="btn-dismiss size-6 flex justify-center items-center"
                 (click)="removeFromCart.emit(dish().id)">
-          Видалити з кошика
+          <ng-icon name="heroShoppingCart" />
         </button>
       }
     </div>
