@@ -20,34 +20,34 @@
   </button>
 }
 
-@for (meal of filteredDishes(); track meal.id) {
+@for (dish of filteredDishes(); track dish.id) {
   <section class="p-3 border bg-white border-gray-300 mb-3 rounded-xl">
     <div class="mb-2 flex justify-between">
-      <h3 class="first-letter:uppercase text-lg">{{ meal.name }}</h3>
+      <h3 class="first-letter:uppercase text-lg">{{ dish.name }}</h3>
       <div class="flex justify-between items-center gap-3">
         <button class="btn size-6 flex justify-center items-center"
-                [routerLink]="[meal.id]">
+                [routerLink]="[dish.id]">
           <ng-icon name="heroPencil" />
         </button>
         <button class="btn-dismiss size-6 flex justify-center items-center"
-                (click)="remove(meal.id)">
+                (click)="remove(dish.id)">
           <ng-icon name="heroTrash" />
         </button>
-        @if(!cartDishIds().has(meal.id)) {
+        @if(!cartDishIds().has(dish.id)) {
           <button class="btn px-3"
-                  (click)="addToCart(meal)">
+                  (click)="addToCart(dish)">
             Додати до кошика
           </button>
         } @else {
           <button class="btn px-3"
-                  (click)="removeFromCart(meal.id)">
+                  (click)="removeFromCart(dish.id)">
             Видалити з кошика
           </button>
         }
       </div>
     </div>
     <div class="flex flex-wrap gap-3">
-      @for (ingredient of meal.ingredients; track $index) {
+      @for (ingredient of dish.ingredients; track $index) {
         <div class="bg-green-100 text-green-700 rounded py-0.5 px-2">{{ ingredient | appDishIngredient }}</div>
       }
     </div>

@@ -75,7 +75,7 @@ export class DishFormComponent implements OnInit {
       this.dishService.addDish(this.form.getRawValue() as Omit<Dish, 'id'>);
     }
 
-    void this.router.navigate(['meals']);
+    void this.router.navigate(['dishes']);
   }
 
   getDish(): void {
@@ -83,7 +83,7 @@ export class DishFormComponent implements OnInit {
 
     const dish = this.dishService.getDish(this.id()!);
     if (!dish) {
-      void this.router.navigate(['meals']);
+      void this.router.navigate(['dishes']);
       return;
     }
 

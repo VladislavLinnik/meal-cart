@@ -46,15 +46,15 @@ export class CartIngredientsList {
   readonly ingredients = computed<Ingredient[]>(() => {
     const map = new Map<string, Ingredient>();
 
-    for (const meal of this.cart()) {
-      for (const ingredient of meal.ingredients) {
+    for (const cartDish of this.cart()) {
+      for (const ingredient of cartDish.ingredients) {
         const key = `${ingredient.name}_${ingredient.unit}`;
         const existing = map.get(key);
-        const newSource = { dishName: meal.name, quantity: meal.quantity };
+        const newSource = { dishName: cartDish.name, quantity: cartDish.quantity };
 
         map.set(key, {
           ...ingredient,
-          amount: ((existing?.amount ?? 0) + ingredient.amount) * meal.quantity,
+          amount: ((existing?.amount ?? 0) + ingredient.amount) * cartDish.quantity,
           selected: ingredient.selected,
           sources: existing ? [...existing.sources!, newSource] : [newSource],
         });
