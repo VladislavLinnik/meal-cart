@@ -50,7 +50,10 @@ export class CartIngredientsList {
       for (const ingredient of cartDish.ingredients) {
         const key = `${ingredient.name}_${ingredient.unit}`;
         const existing = map.get(key);
-        const newSource = { dishName: cartDish.name, quantity: cartDish.quantity };
+        const newSource = {
+          dishName: cartDish.name,
+          quantity: cartDish.quantity,
+        };
 
         map.set(key, {
           ...ingredient,

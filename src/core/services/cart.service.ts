@@ -21,7 +21,13 @@ export class CartService {
   }
 
   addDish(dish: Dish): void {
-    const payload: CartDish = { ...dish, quantity: 1 };
+    const payload: CartDish = { ...dish,
+      ingredients: dish.ingredients.map((ing: Ingredient) => ({
+        ...ing,
+        name: ing.name.toLowerCase().trim()
+      })),
+      quantity: 1
+    };
     this._cart.update((cart) => [...cart, payload]);
     this.saveToStorage();
   }
