@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowLeft, heroPlus } from '@ng-icons/heroicons/outline';
 import { Router, RouterLink } from '@angular/router';
@@ -14,7 +8,6 @@ import { KeyValue, NgClass } from '@angular/common';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dish } from '../../../../core/models/dish.model';
 import { asGroup } from '../../../../core/utils/form.helper';
-import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-dish-form',
@@ -29,7 +22,6 @@ export class DishFormComponent implements OnInit {
 
   private readonly router = inject(Router);
   private readonly dishService = inject(DishService);
-  private readonly cartService = inject(CartService);
   private readonly fb = inject(FormBuilder);
 
   readonly asGroup = asGroup;
@@ -40,7 +32,7 @@ export class DishFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    if (this.isEditMode) this.getDish();
+    if (this.isEditMode()) this.getDish();
     else this.addIngredient();
   }
 
@@ -48,9 +40,7 @@ export class DishFormComponent implements OnInit {
     return this.form.controls['ingredients'] as FormArray;
   }
 
-  get isEditMode(): boolean {
-    return !!this.id();
-  }
+  readonly isEditMode = computed(() => !!this.id());
 
   addIngredient(ingredient?: Ingredient): void {
     const formGroup = this.fb.group({
@@ -68,9 +58,8 @@ export class DishFormComponent implements OnInit {
   save(): void {
     if (this.form.invalid) return;
 
-    if (this.isEditMode) {
+    if (this.isEditMode()) {
       this.dishService.updateDish(this.id()!, this.form.getRawValue() as Partial<Dish>);
-      this.cartService.updateDish(this.id()!, this.form.getRawValue() as Partial<Dish>);
     } else {
       this.dishService.addDish(this.form.getRawValue() as Omit<Dish, 'id'>);
     }
@@ -79,8 +68,6 @@ export class DishFormComponent implements OnInit {
   }
 
   getDish(): void {
-    if (!this.isEditMode) return;
-
     const dish = this.dishService.getDish(this.id()!);
     if (!dish) {
       void this.router.navigate(['dishes']);

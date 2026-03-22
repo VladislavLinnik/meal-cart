@@ -30,6 +30,7 @@ export class DishService {
     this._dishes.update((dishes) => {
       return dishes.map((m) => (m.id === id ? { ...m, ...dish } : m));
     });
+    this.cartService.updateDish(id, dish);
     this.saveToStorage();
   }
 

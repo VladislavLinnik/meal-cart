@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between mb-5">
-  <h2 class="text-lg font-bold">{{ isEditMode ? 'Змінити страву' : 'Нова страва' }}</h2>
+  <h2 class="text-lg font-bold">{{ isEditMode() ? 'Змінити страву' : 'Нова страва' }}</h2>
   <button class="btn px-2 py-1 items-center"
           routerLink="/dishes">
     <ng-icon class="mr-2" name="heroArrowLeft" />
@@ -15,7 +15,7 @@
 
   <h3 class="text-lg mb-2">Інгредієнти</h3>
   <div formArrayName="ingredients">
-    @for (group of ingredients.controls; track group) {
+    @for (group of ingredients.controls; track $index) {
       <div class="grid grid-cols-[2fr_1fr_1fr] gap-3 mb-3"
            [ngClass]="{'grid-cols-[2fr_1fr_1fr_auto]': ingredients.controls.length > 1}"
            [formGroup]="asGroup(group)">
@@ -56,5 +56,5 @@
           routerLink="/dishes">Скасувати</button>
   <button class="btn text-white bg-blue-500! disabled:cursor-not-allowed! disabled:bg-gray-400! hover:bg-blue-600! py-1 px-2"
           [disabled]="form.invalid"
-          (click)="save()">{{ isEditMode ? 'Зберегти' : 'Додати' }}</button>
+          (click)="save()">{{ isEditMode() ? 'Зберегти' : 'Додати' }}</button>
 </div>
