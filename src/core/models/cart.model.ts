@@ -1,5 +1,5 @@
-import { Meal } from './meals.model';
+import { Dish } from './dish.model';
 
-export interface CartMeal extends Meal {
+export interface CartDish extends Dish {
   quantity: number;
 }

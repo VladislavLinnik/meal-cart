@@ -1,7 +1,7 @@
 import { ValueOf } from './utils.model';
 
 export const STORAGE_KEY = {
-  Meals: 'meals',
+  Dish: 'dish',
   Cart: 'cart',
   CartView: 'cartView',
 } as const;

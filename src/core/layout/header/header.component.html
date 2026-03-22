@@ -3,7 +3,7 @@
   <nav>
     <ul class="flex gap-6">
       <li>
-        <a routerLink="meals"
+        <a routerLink="dishes"
            routerLinkActive="bg-gray-200"
            class="text-cyan-700 hover:bg-gray-200 focus:bg-gray-200 p-2 rounded cursor-pointer">Страви</a>
       </li>
@@ -12,8 +12,8 @@
            routerLinkActive="bg-gray-200"
            class="text-cyan-700 hover:bg-gray-200 focus:bg-gray-200 p-2 rounded cursor-pointer">
           Кошик
-          @if (cartService.totalMealsInCart()) {
-            <span class="ml-1 inline-flex items-center justify-center rounded-full bg-green-500 text-white size-6 text-xs">{{ cartService.totalMealsInCart() }}</span>
+          @if (cartService.totalDishesInCart()) {
+            <span class="ml-1 inline-flex items-center justify-center rounded-full bg-green-500 text-white size-6 text-xs">{{ cartService.totalDishesInCart() }}</span>
           }
         </a>
       </li>

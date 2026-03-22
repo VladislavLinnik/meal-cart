@@ -7,7 +7,7 @@
   </button>
 </div>
 
-@if (meals().length) {
+@if (dishes().length) {
   <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-4 mb-5" type="text"
          (input)="onSearch($any($event.target).value)"
          placeholder="Пошук страви...">
@@ -20,7 +20,7 @@
   </button>
 }
 
-@for (meal of filteredMeals(); track meal.id) {
+@for (meal of filteredDishes(); track meal.id) {
   <section class="p-3 border bg-white border-gray-300 mb-3 rounded-xl">
     <div class="mb-2 flex justify-between">
       <h3 class="first-letter:uppercase text-lg">{{ meal.name }}</h3>
@@ -33,7 +33,7 @@
                 (click)="remove(meal.id)">
           <ng-icon name="heroTrash" />
         </button>
-        @if(!cartMealIds().has(meal.id)) {
+        @if(!cartDishIds().has(meal.id)) {
           <button class="btn px-3"
                   (click)="addToCart(meal)">
             Додати до кошика
@@ -48,7 +48,7 @@
     </div>
     <div class="flex flex-wrap gap-3">
       @for (ingredient of meal.ingredients; track $index) {
-        <div class="bg-green-100 text-green-700 rounded py-0.5 px-2">{{ ingredient | appMealIngredient }}</div>
+        <div class="bg-green-100 text-green-700 rounded py-0.5 px-2">{{ ingredient | appDishIngredient }}</div>
       }
     </div>
   </section>

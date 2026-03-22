@@ -2,7 +2,7 @@
   <h2 class="text-lg font-bold">Список покупок</h2>
   @if (cart().length) {
     <button class="btn items-center py-1 px-3"
-            (click)="changeViewSelected.emit(CART_PAGE_VIEW.Meals)">
+            (click)="changeViewSelected.emit(CART_PAGE_VIEW.Dish)">
       <ng-icon class="mr-1" name="heroArrowLeft" />
       Страви
     </button>
@@ -37,7 +37,7 @@
 } @else {
   <p class="text-center text-gray-500 text-sm mb-2">Немає доданих страв</p>
   <button class="mx-auto btn items-center py-1 px-3"
-          routerLink="meals">
+          routerLink="dishes">
     <ng-icon class="mr-1" name="heroPlus" />
     Додати
   </button>

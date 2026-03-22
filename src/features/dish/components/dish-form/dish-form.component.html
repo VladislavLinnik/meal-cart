@@ -1,15 +1,15 @@
 <div class="flex items-center justify-between mb-5">
   <h2 class="text-lg font-bold">{{ isEditMode ? 'Змінити страву' : 'Нова страва' }}</h2>
   <button class="btn px-2 py-1 items-center"
-          routerLink="/meals">
+          routerLink="/dishes">
     <ng-icon class="mr-2" name="heroArrowLeft" />
     Назад до страв
   </button>
 </div>
 
 <form [formGroup]="form">
-  <label for="mealName" class="block mb-2 cursor-pointer">Назва страви</label>
-  <input id="mealName" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 mb-5"
+  <label for="dishName" class="block mb-2 cursor-pointer">Назва страви</label>
+  <input id="dishName" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 mb-5"
          type="text" placeholder="Введіть назву страви..."
          formControlName="name">
 
@@ -53,7 +53,7 @@
 
 <div class="flex justify-end gap-4">
   <button class="btn-dismiss py-1 px-2"
-          routerLink="/meals">Скасувати</button>
+          routerLink="/dishes">Скасувати</button>
   <button class="btn text-white bg-blue-500! disabled:cursor-not-allowed! disabled:bg-gray-400! hover:bg-blue-600! py-1 px-2"
           [disabled]="form.invalid"
           (click)="save()">{{ isEditMode ? 'Зберегти' : 'Додати' }}</button>

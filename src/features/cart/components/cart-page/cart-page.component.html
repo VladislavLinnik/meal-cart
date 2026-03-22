@@ -1,6 +1,6 @@
 <div class="mx-auto">
-  @if (pageView() === CART_PAGE_VIEW.Meals) {
-    <app-cart-meals-list
+  @if (pageView() === CART_PAGE_VIEW.Dish) {
+    <app-cart-dishes-list
       (changeViewSelected)="changePageView($event)" />
   }
 

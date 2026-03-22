@@ -8,7 +8,7 @@ import { IngredientSources } from '../../../core/models/ingredient.model';
 export class FormatIngredientSourcesPipe implements PipeTransform {
   transform(sources: IngredientSources[] | undefined): string {
     return (sources || [])
-      .map((source) => `${source.mealName} x${source.quantity}`)
+      .map((source) => `${source.dishName} x${source.quantity}`)
       .join(', ');
   }
 }

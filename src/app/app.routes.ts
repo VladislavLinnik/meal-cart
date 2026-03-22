@@ -3,28 +3,28 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'meals',
+    redirectTo: 'dishes',
     pathMatch: 'full',
   },
   {
-    path: 'meals',
+    path: 'dishes',
     loadComponent: () =>
-      import('../features/meals/components/meals-list/meals-list.component').then(
-        (m) => m.MealsListComponent,
+      import('../features/dish/components/dishes-list/dishes-list.component').then(
+        (m) => m.DishesListComponent,
       ),
   },
   {
-    path: 'meals/new',
+    path: 'dishes/new',
     loadComponent: () =>
-      import('../features/meals/components/meals-form/meals-form.component').then(
-        (m) => m.MealsFormComponent,
+      import('../features/dish/components/dish-form/dish-form.component').then(
+        (m) => m.DishFormComponent,
       ),
   },
   {
-    path: 'meals/:id',
+    path: 'dishes/:id',
     loadComponent: () =>
-      import('../features/meals/components/meals-form/meals-form.component').then(
-        (m) => m.MealsFormComponent,
+      import('../features/dish/components/dish-form/dish-form.component').then(
+        (m) => m.DishFormComponent,
       ),
   },
   {
@@ -34,5 +34,5 @@ export const routes: Routes = [
         (m) => m.CartPageComponent,
       ),
   },
-  { path: '**', redirectTo: 'meals' },
+  { path: '**', redirectTo: 'dishes' },
 ];

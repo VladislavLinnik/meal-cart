@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { StorageService } from './storage.service';
-import { CartMeal } from '../models/cart.model';
-import { Meal } from '../models/meals.model';
+import { CartDish } from '../models/cart.model';
+import { Dish } from '../models/dish.model';
 import { STORAGE_KEY } from '../models/storage.model';
 import { Ingredient } from '../models/ingredient.model';
 
@@ -11,36 +11,36 @@ import { Ingredient } from '../models/ingredient.model';
 export class CartService {
   private readonly storageService = inject(StorageService);
 
-  private _cart = signal<CartMeal[]>([]);
+  private _cart = signal<CartDish[]>([]);
   readonly cart = this._cart.asReadonly();
 
-  readonly totalMealsInCart = computed(() => this._cart().length);
+  readonly totalDishesInCart = computed(() => this._cart().length);
 
   constructor() {
     this.load();
   }
 
-  addMeal(meal: Meal): void {
-    const payload: CartMeal = { ...meal, quantity: 1 };
+  addDish(dish: Dish): void {
+    const payload: CartDish = { ...dish, quantity: 1 };
     this._cart.update((cart) => [...cart, payload]);
     this.saveToStorage();
   }
 
-  updateMeal(id: string, meal: Partial<Meal>): void {
+  updateDish(id: string, dish: Partial<Dish>): void {
     this._cart.update((cart) => {
-      return cart.map((m) => (m.id === id ? { ...m, ...meal } : m));
+      return cart.map((m) => (m.id === id ? { ...m, ...dish } : m));
     });
     this.saveToStorage();
   }
 
-  removeMeal(id: string): void {
+  removeDish(id: string): void {
     this._cart.update((cart) => cart.filter((cart) => cart.id !== id));
     this.saveToStorage();
   }
 
   updateQuantity(id: string, step: number): void {
-    this._cart.update((meals) =>
-      meals.map((m) => (m.id === id ? { ...m, quantity: Math.max(m.quantity + step, 1) } : m)),
+    this._cart.update((dishes) =>
+      dishes.map((m) => (m.id === id ? { ...m, quantity: Math.max(m.quantity + step, 1) } : m)),
     );
     this.saveToStorage();
   }
@@ -49,9 +49,9 @@ export class CartService {
     const key = `${ingredient.name}_${ingredient.unit}`;
 
     this._cart.update((cart) =>
-      cart.map((meal) => ({
-        ...meal,
-        ingredients: meal.ingredients.map((ing) =>
+      cart.map((dish) => ({
+        ...dish,
+        ingredients: dish.ingredients.map((ing) =>
           `${ing.name}_${ing.unit}` === key ? { ...ing, selected: !ing.selected } : ing,
         ),
       })),
@@ -65,7 +65,7 @@ export class CartService {
   }
 
   private load(): void {
-    const stored = this.storageService.get<CartMeal[]>(STORAGE_KEY.Cart);
+    const stored = this.storageService.get<CartDish[]>(STORAGE_KEY.Cart);
     this._cart.set(stored ? stored : []);
   }
 }

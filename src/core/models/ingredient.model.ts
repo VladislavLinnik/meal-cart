@@ -9,7 +9,7 @@ export interface Ingredient {
 }
 
 export interface IngredientSources {
-  mealName: string;
+  dishName: string;
   quantity: number;
 }
 

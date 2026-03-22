@@ -8,39 +8,39 @@ import {
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowLeft, heroPlus } from '@ng-icons/heroicons/outline';
 import { Router, RouterLink } from '@angular/router';
-import { MealsService } from '../../../../core/services/meals.service';
+import { DishService } from '../../../../core/services/dish.service';
 import { Ingredient, UnitMeasurement } from '../../../../core/models/ingredient.model';
 import { KeyValue, NgClass } from '@angular/common';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Meal } from '../../../../core/models/meals.model';
+import { Dish } from '../../../../core/models/dish.model';
 import { asGroup } from '../../../../core/utils/form.helper';
 import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
-  selector: 'app-meals-form',
+  selector: 'app-dish-form',
   imports: [NgIcon, RouterLink, ReactiveFormsModule, NgClass],
   viewProviders: [provideIcons({ heroArrowLeft, heroPlus })],
-  templateUrl: './meals-form.component.html',
+  templateUrl: './dish-form.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MealsFormComponent implements OnInit {
+export class DishFormComponent implements OnInit {
   readonly id = input<string>();
 
   private readonly router = inject(Router);
-  private readonly mealsService = inject(MealsService);
+  private readonly dishService = inject(DishService);
   private readonly cartService = inject(CartService);
   private readonly fb = inject(FormBuilder);
 
   readonly asGroup = asGroup;
-  readonly units: KeyValue<string, UnitMeasurement>[] = this.mealsService.getUnitMeasurements();
+  readonly units: KeyValue<string, UnitMeasurement>[] = this.dishService.getUnitMeasurements();
   form = this.fb.group({
     name: ['', Validators.required],
     ingredients: this.fb.array([]),
   });
 
   ngOnInit(): void {
-    if (this.isEditMode) this.getMeal();
+    if (this.isEditMode) this.getDish();
     else this.addIngredient();
   }
 
@@ -69,26 +69,26 @@ export class MealsFormComponent implements OnInit {
     if (this.form.invalid) return;
 
     if (this.isEditMode) {
-      this.mealsService.updateMeal(this.id()!, this.form.getRawValue() as Partial<Meal>);
-      this.cartService.updateMeal(this.id()!, this.form.getRawValue() as Partial<Meal>);
-      void this.router.navigate(['meals']);
+      this.dishService.updateDish(this.id()!, this.form.getRawValue() as Partial<Dish>);
+      this.cartService.updateDish(this.id()!, this.form.getRawValue() as Partial<Dish>);
     } else {
-      this.mealsService.addMeal(this.form.getRawValue() as Omit<Meal, 'id'>);
-      void this.router.navigate(['meals']);
+      this.dishService.addDish(this.form.getRawValue() as Omit<Dish, 'id'>);
     }
+
+    void this.router.navigate(['meals']);
   }
 
-  getMeal(): void {
+  getDish(): void {
     if (!this.isEditMode) return;
 
-    const meal = this.mealsService.getMeal(this.id()!);
-    if (!meal) {
+    const dish = this.dishService.getDish(this.id()!);
+    if (!dish) {
       void this.router.navigate(['meals']);
       return;
     }
 
-    this.form.patchValue({ name: meal.name });
+    this.form.patchValue({ name: dish.name });
 
-    meal.ingredients.forEach((ingredient) => this.addIngredient(ingredient));
+    dish.ingredients.forEach((ingredient) => this.addIngredient(ingredient));
   }
 }

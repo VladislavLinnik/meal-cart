@@ -8,9 +8,9 @@ import {
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroPencil, heroPlus, heroTrash } from '@ng-icons/heroicons/outline';
 import { RouterLink } from '@angular/router';
-import { Meal } from '../../../../core/models/meals.model';
-import { MealsService } from '../../../../core/services/meals.service';
-import { MealIngredientPipe } from '../../pipes/meal-ingredient.pipe';
+import { Dish } from '../../../../core/models/dish.model';
+import { DishService } from '../../../../core/services/dish.service';
+import { DishIngredientPipe } from '../../pipes/dish-ingredient.pipe';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -18,32 +18,32 @@ import {
 } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CartService } from '../../../../core/services/cart.service';
-import { CartMeal } from '../../../../core/models/cart.model';
+import { CartDish } from '../../../../core/models/cart.model';
 
 @Component({
-  selector: 'app-meals-list',
-  imports: [NgIcon, RouterLink, MealIngredientPipe],
-  templateUrl: './meals-list.component.html',
+  selector: 'app-dishes-list',
+  imports: [NgIcon, RouterLink, DishIngredientPipe],
+  templateUrl: './dishes-list.component.html',
   viewProviders: [provideIcons({ heroPencil, heroTrash, heroPlus })],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MealsListComponent {
-  private readonly mealsService = inject(MealsService);
+export class DishesListComponent {
+  private readonly dishService = inject(DishService);
   private readonly cartService = inject(CartService);
-  readonly meals: Signal<Meal[]> = this.mealsService.meals;
-  readonly cart: Signal<CartMeal[]> = this.cartService.cart;
+  readonly dishes: Signal<Dish[]> = this.dishService.dishes;
+  readonly cart: Signal<CartDish[]> = this.cartService.cart;
   private readonly searchSubject = new Subject<string>();
 
-  readonly filteredMeals = computed<Meal[]>(() => {
+  readonly filteredDishes = computed<Dish[]>(() => {
     const query = this.searchQuery().toLowerCase().trim();
-    if (!query) return this.mealsService.meals();
+    if (!query) return this.dishService.dishes();
 
-    return this.meals().filter((meal) => meal.name.toLowerCase().includes(query));
+    return this.dishes().filter((dish) => dish.name.toLowerCase().includes(query));
   });
 
-  readonly cartMealIds = computed<Set<string>>(() => {
-    return new Set(this.cart().map((meal: Meal) => meal.id));
+  readonly cartDishIds = computed<Set<string>>(() => {
+    return new Set(this.cart().map((dish: Dish) => dish.id));
   });
 
   readonly searchQuery = toSignal(
@@ -58,15 +58,15 @@ export class MealsListComponent {
   }
 
   remove(id: string): void {
-    this.mealsService.removeMeal(id);
-    this.cartService.removeMeal(id);
+    this.dishService.removeDish(id);
+    this.cartService.removeDish(id);
   }
 
-  addToCart(meal: Meal): void {
-    this.cartService.addMeal(meal);
+  addToCart(dish: Dish): void {
+    this.cartService.addDish(dish);
   }
 
   removeFromCart(id: string): void {
-    this.cartService.removeMeal(id);
+    this.cartService.removeDish(id);
   }
 }
