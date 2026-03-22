@@ -4,12 +4,14 @@ import { UNIT_MEASUREMENT, UnitMeasurement } from '../models/ingredient.model';
 import { KeyValue } from '@angular/common';
 import { Dish } from '../models/dish.model';
 import { STORAGE_KEY } from '../models/storage.model';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DishService {
   private readonly storageService = inject(StorageService);
+  private readonly cartService = inject(CartService);
 
   private _dishes = signal<Dish[]>([]);
   readonly dishes = this._dishes.asReadonly();
@@ -37,6 +39,7 @@ export class DishService {
 
   removeDish(id: string): void {
     this._dishes.update((dishes) => dishes.filter((dish) => dish.id !== id));
+    this.cartService.removeDish(id);
     this.saveToStorage();
   }
 

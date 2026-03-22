@@ -7,10 +7,14 @@
   </button>
 </div>
 
-@if (dishes().length) {
+@if (dishService.dishes().length) {
   <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-4 mb-5" type="text"
+         id="dishSearch"
          (input)="onSearch($any($event.target).value)"
          placeholder="Пошук страви...">
+  @if (!filteredDishes().length) {
+    <p class="text-center text-gray-500 text-sm">Нічого не знайдено</p>
+  }
 } @else {
   <p class="text-center text-gray-500 text-sm mb-2">Створіть страву, щоб розпочати</p>
   <button class="mx-auto btn items-center py-1 px-3"
@@ -21,35 +25,9 @@
 }
 
 @for (dish of filteredDishes(); track dish.id) {
-  <section class="p-3 border bg-white border-gray-300 mb-3 rounded-xl">
-    <div class="mb-2 flex justify-between">
-      <h3 class="first-letter:uppercase text-lg">{{ dish.name }}</h3>
-      <div class="flex justify-between items-center gap-3">
-        <button class="btn size-6 flex justify-center items-center"
-                [routerLink]="[dish.id]">
-          <ng-icon name="heroPencil" />
-        </button>
-        <button class="btn-dismiss size-6 flex justify-center items-center"
-                (click)="remove(dish.id)">
-          <ng-icon name="heroTrash" />
-        </button>
-        @if(!cartDishIds().has(dish.id)) {
-          <button class="btn px-3"
-                  (click)="addToCart(dish)">
-            Додати до кошика
-          </button>
-        } @else {
-          <button class="btn px-3"
-                  (click)="removeFromCart(dish.id)">
-            Видалити з кошика
-          </button>
-        }
-      </div>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      @for (ingredient of dish.ingredients; track $index) {
-        <div class="bg-green-100 text-green-700 rounded py-0.5 px-2">{{ ingredient | appDishIngredient }}</div>
-      }
-    </div>
-  </section>
+  <app-dish-card [dish]="dish"
+                 [isInCart]="cartDishIds().has(dish.id)"
+                 (remove)="remove($event)"
+                 (addToCart)="addToCart($event)"
+                 (removeFromCart)="removeFromCart($event)" />
 }
