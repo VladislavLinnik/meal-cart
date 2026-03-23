@@ -52,7 +52,7 @@ export class DishService {
   }
 
   private saveToStorage(): void {
-    this.storageService.set(STORAGE_KEY.Dish, this._dishes());
+    this.storageService.set<Dish[]>(STORAGE_KEY.Dish, this._dishes());
   }
 
   private load(): void {

@@ -44,6 +44,11 @@ export class CartService {
     this.saveToStorage();
   }
 
+  clear(): void {
+    this.storageService.remove(STORAGE_KEY.Cart);
+    this._cart.set([]);
+  }
+
   updateQuantity(id: string, step: number): void {
     this._cart.update((dishes) =>
       dishes.map((m) => (m.id === id ? { ...m, quantity: Math.max(m.quantity + step, 1) } : m)),
@@ -67,7 +72,7 @@ export class CartService {
   }
 
   private saveToStorage(): void {
-    this.storageService.set(STORAGE_KEY.Cart, this._cart());
+    this.storageService.set<CartDish[]>(STORAGE_KEY.Cart, this._cart());
   }
 
   private load(): void {

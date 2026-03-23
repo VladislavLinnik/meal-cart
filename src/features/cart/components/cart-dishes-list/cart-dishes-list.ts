@@ -31,9 +31,7 @@ export class CartDishesList {
   };
 
   removeAll(): void {
-    this.cart().forEach((cart: CartDish) => {
-      this.removeFromCart(cart.id)
-    });
+    this.cartService.clear();
   };
 
   removeFromCart(id: string): void {
