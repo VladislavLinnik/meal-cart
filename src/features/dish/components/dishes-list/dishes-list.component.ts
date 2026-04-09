@@ -23,7 +23,6 @@ import { DishCardComponent } from '../dish-card/dish-card.component';
   imports: [NgIcon, RouterLink, DishCardComponent],
   templateUrl: './dishes-list.component.html',
   viewProviders: [provideIcons({ heroPencil, heroTrash, heroPlus })],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishesListComponent {

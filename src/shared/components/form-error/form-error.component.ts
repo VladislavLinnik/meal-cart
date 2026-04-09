@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: 'app-form-error',
   imports: [],
   template: `<ng-content /> `,
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormErrorComponent {

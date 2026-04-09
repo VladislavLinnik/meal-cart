@@ -7,7 +7,6 @@ import { heroPlus } from '@ng-icons/heroicons/outline';
   imports: [NgIcon],
   viewProviders: [provideIcons({ heroPlus })],
   templateUrl: './dialog.component.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.id]': 'null',

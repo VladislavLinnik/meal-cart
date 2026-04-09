@@ -10,7 +10,6 @@ import { heroShoppingCart } from '@ng-icons/heroicons/outline';
   imports: [DishIngredientPipe, NgIcon, RouterLink, NgIcon],
   viewProviders: [provideIcons({ heroShoppingCart })],
   templateUrl: './dish-card.component.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishCardComponent {

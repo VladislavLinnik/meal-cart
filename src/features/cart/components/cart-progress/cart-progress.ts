@@ -5,7 +5,6 @@ import { NgStyle } from '@angular/common';
   selector: 'app-cart-progress',
   imports: [NgStyle],
   templateUrl: './cart-progress.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartProgress {

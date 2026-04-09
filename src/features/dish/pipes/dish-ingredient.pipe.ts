@@ -3,7 +3,6 @@ import { Ingredient, UNIT_MEASUREMENT } from '../../../core/models/ingredient.mo
 
 @Pipe({
   name: 'appDishIngredient',
-  standalone: true,
 })
 export class DishIngredientPipe implements PipeTransform {
   transform(value: Ingredient): string {

@@ -3,7 +3,6 @@ import { IngredientSources } from '../../../core/models/ingredient.model';
 
 @Pipe({
   name: 'appFormatIngredientSources',
-  standalone: true,
 })
 export class FormatIngredientSourcesPipe implements PipeTransform {
   transform(sources: IngredientSources[] | undefined): string {

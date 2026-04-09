@@ -23,7 +23,6 @@ import { FormErrorComponent } from '../../../../shared/components/form-error/for
   ],
   viewProviders: [provideIcons({ heroArrowLeft, heroPlus })],
   templateUrl: './dish-form.component.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishFormComponent implements OnInit {

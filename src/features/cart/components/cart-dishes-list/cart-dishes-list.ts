@@ -12,7 +12,6 @@ import { I18nPluralPipe } from '@angular/common';
   imports: [NgIcon, RouterLink, I18nPluralPipe],
   viewProviders: [provideIcons({ heroArrowRight, heroMinus, heroPlus, heroTrash })],
   templateUrl: './cart-dishes-list.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartDishesList {

@@ -13,7 +13,6 @@ import { EMPTY, map, merge, of, switchMap } from 'rxjs';
   selector: 'app-form-errors',
   imports: [],
   templateUrl: './form-errors.component.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormErrorsComponent {
