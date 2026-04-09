@@ -6,7 +6,21 @@ import { StorageKey } from '../models/storage.model';
 export class LocalStorageService extends StorageService {
   get<T>(key: StorageKey): T | null {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
+    let output: T | null;
+
+    try {
+      output = item ? JSON.parse(item) : null;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Failed to parse JSON:', error.message);
+      } else {
+        console.log('Unexpected error type:', error);
+      }
+
+      return null;
+    }
+
+    return output;
   }
 
   set<T>(key: StorageKey, value: T): void {

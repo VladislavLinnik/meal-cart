@@ -8,7 +8,6 @@ import { STORAGE_KEY } from '../../../../core/models/storage.model';
   selector: 'app-cart-page',
   imports: [CartDishesList, CartIngredientsList],
   templateUrl: './cart-page.component.html',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartPageComponent {
@@ -16,10 +15,10 @@ export class CartPageComponent {
   readonly CART_PAGE_VIEW = CART_PAGE_VIEW;
 
   constructor() {
-    const storagePageView = JSON.parse(localStorage.getItem(STORAGE_KEY.CartView) || 'null');
-    const isValid = Object.values(CART_PAGE_VIEW).includes(storagePageView);
+    const storagePageView = this.getStoragePageView();
 
-    if (isValid) this.changePageView(storagePageView);
+    const isValidPage = Object.values(CART_PAGE_VIEW).includes(storagePageView);
+    if (isValidPage) this.changePageView(storagePageView);
 
     effect(() => {
       localStorage.setItem(STORAGE_KEY.CartView, JSON.stringify(this.pageView()));
@@ -28,5 +27,19 @@ export class CartPageComponent {
 
   changePageView(pageView: CartPageView): void {
     this.pageView.set(pageView);
+  }
+
+  private getStoragePageView() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY.CartView) || 'null');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Failed to parse JSON:', error.message);
+      } else {
+        console.log('Unexpected error type:', error);
+      }
+
+      return null;
+    }
   }
 }
