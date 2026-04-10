@@ -1,10 +1,12 @@
 <div class="flex items-center justify-between mb-5">
   <h2 class="text-lg font-bold">Мої страви</h2>
-  <button class="btn items-center py-1 px-3"
-          routerLink="new">
-    <ng-icon class="mr-1" name="heroPlus" />
-    Створити
-  </button>
+  @if (dishService.dishes().length) {
+    <button class="btn items-center py-1 px-3"
+            routerLink="new">
+      <ng-icon class="mr-1" name="heroPlus" />
+      Створити
+    </button>
+  }
 </div>
 
 @if (dishService.dishes().length) {
