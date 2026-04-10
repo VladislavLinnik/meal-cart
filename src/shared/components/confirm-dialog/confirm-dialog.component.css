@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+:host {
+  @apply p-5 bg-white w-100 rounded-xl inset-0 m-auto drop-shadow-sm;
+}
+
+:host::backdrop {
+  @apply backdrop-blur;
+}

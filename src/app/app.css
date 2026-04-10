@@ -1,3 +1,7 @@
 @reference "tailwindcss";
 
-:host { @apply block min-h-screen bg-amber-50/70; }
+:host { @apply  block min-h-screen bg-amber-50/70; }
+
+:host-context(.dark) {
+  @apply bg-slate-700 text-white;
+}

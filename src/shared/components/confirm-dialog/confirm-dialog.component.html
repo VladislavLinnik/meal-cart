@@ -1,0 +1,15 @@
+<header class="flex justify-between mb-3">
+  <div class="text-xl">{{ title() }}</div>
+  <button class="btn-dismiss border-none size-6 flex justify-center items-center"
+          (click)="closed.emit()">
+    <ng-icon class="rotate-45" name="heroPlus"></ng-icon>
+  </button>
+</header>
+<p class="text-gray-500 text-sm mb-5">
+  {{ message() }}
+</p>
+<footer class="flex justify-end gap-4">
+  <button class="btn-dismiss py-1 px-2" (click)="closed.emit()">{{ cancelText() }}</button>
+  <button class="btn text-white bg-blue-500! hover:bg-blue-600! py-1 px-2"
+          (click)="action.emit(); closed.emit()">{{ confirmText() }}</button>
+</footer>

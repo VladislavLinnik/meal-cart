@@ -17,6 +17,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CartService } from '../../../../core/services/cart.service';
 import { DishCardComponent } from '../dish-card/dish-card.component';
+import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
 
 @Component({
   selector: 'app-dishes-list',
@@ -29,6 +30,8 @@ export class DishesListComponent {
   protected readonly dishService = inject(DishService);
   private readonly cartService = inject(CartService);
   private readonly searchSubject = new Subject<string>();
+
+  private readonly confirmChecker = injectConfirmChecker();
 
   readonly filteredDishes = computed<Dish[]>(() => {
     const query = this.searchQuery().toLowerCase().trim();
@@ -53,7 +56,12 @@ export class DishesListComponent {
   }
 
   remove(id: string): void {
-    this.dishService.removeDish(id);
+    this.confirmChecker(
+      () => this.dishService.removeDish(id),
+      {
+      message: 'Видалити страву?',
+      confirmText: 'Видалити',
+    });
   }
 
   addToCart(dish: Dish): void {

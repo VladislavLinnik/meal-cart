@@ -1,16 +1,16 @@
-<div class="container flex-col sm:flex-row mx-auto py-3 px-10 sm:px-0 flex justify-between">
-  <h1 class="text-xl font-medium text-center mb-3 sm:mb-0">Meal Cart</h1>
+<div class="relative container flex-col sm:flex-row mx-auto py-3 px-10 sm:px-0 flex justify-between text-cyan-700 dark:text-white">
+  <h1 class="text-xl font-medium text-center mb-3 sm:mb-0 select-none">Meal Cart</h1>
   <nav class="flex justify-center">
     <ul class="flex gap-6">
       <li>
         <a routerLink="dishes"
-           routerLinkActive="bg-gray-200"
-           class="flex items-center text-cyan-700 hover:bg-gray-200 focus:bg-gray-200 p-2 rounded cursor-pointer">Страви</a>
+           routerLinkActive="bg-gray-200 dark:bg-white dark:text-gray-500"
+           class="flex items-center hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-white dark:hover:text-gray-500 dark:focus:bg-white dark:focus:text-gray-500 p-2 rounded cursor-pointer">Страви</a>
       </li>
       <li>
         <a routerLink="cart"
-           routerLinkActive="bg-gray-200"
-           class="flex items-center text-cyan-700 hover:bg-gray-200 focus:bg-gray-200 p-2 rounded cursor-pointer">
+           routerLinkActive="bg-gray-200 dark:bg-white dark:text-gray-500"
+           class="flex items-center  hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-white dark:hover:text-gray-500 dark:focus:bg-white dark:focus:text-gray-500 p-2 rounded cursor-pointer">
           <ng-icon name="heroShoppingCart" />
           Кошик
           @if (cartService.totalDishesInCart()) {
@@ -20,4 +20,8 @@
       </li>
     </ul>
   </nav>
+  <a routerLink="settings"
+     class="sm:static absolute right-4 top-3 flex items-center w-fit hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-white dark:hover:text-gray-500 dark:focus:bg-white dark:focus:text-gray-500 p-2 rounded cursor-pointer">
+    <ng-icon name="heroCog6Tooth" size="24" />
+  </a>
 </div>

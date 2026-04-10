@@ -6,6 +6,7 @@ import { CartService } from '../../../../core/services/cart.service';
 import { CartDish } from '../../../../core/models/cart.model';
 import { RouterLink } from '@angular/router';
 import { I18nPluralPipe } from '@angular/common';
+import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
 
 @Component({
   selector: 'app-cart-dishes-list',
@@ -18,6 +19,7 @@ export class CartDishesList {
   readonly changeViewSelected = output<CartPageView>();
   readonly cartService = inject(CartService);
   readonly cart: Signal<CartDish[]> = this.cartService.cart;
+  private readonly confirmChecker = injectConfirmChecker();
 
   readonly CART_PAGE_VIEW = CART_PAGE_VIEW;
 
@@ -30,11 +32,17 @@ export class CartDishesList {
   };
 
   removeAll(): void {
-    this.cartService.clear();
+    this.confirmChecker(() => this.cartService.clear(), {
+      message: 'Видалити всі страви з кошика?',
+      confirmText: 'Видалити',
+    });
   };
 
   removeFromCart(id: string): void {
-    this.cartService.removeDish(id);
+    this.confirmChecker(() => this.cartService.removeDish(id), {
+      message: 'Видалити страву з кошика?',
+      confirmText: 'Видалити',
+    });
   }
 
   updateQuantity(id: string, quantity: number): void {

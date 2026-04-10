@@ -1,7 +1,9 @@
 @import 'tailwindcss';
 
+@variant dark (&:where(.dark, .dark *));
+
 .btn {
-  @apply flex bg-white hover:bg-gray-100 transition rounded-lg border border-gray-300 cursor-pointer;
+  @apply flex bg-white dark:text-gray-800 hover:bg-gray-100 transition rounded-lg border border-gray-300 cursor-pointer;
 }
 
 .btn[disabled] {
@@ -10,4 +12,8 @@
 
 .btn-dismiss {
   @apply flex bg-red-500 hover:bg-red-600 text-white transition rounded-lg border border-gray-300 cursor-pointer;
+}
+
+input, select {
+  @apply dark:text-gray-800;
 }
