@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-toggle-switch',
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './toggle-switch.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

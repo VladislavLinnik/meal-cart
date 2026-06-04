@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, output, Signal } from '@angular/core';
+import { Component, inject, output, Signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowRight, heroMinus, heroPlus, heroTrash } from '@ng-icons/heroicons/outline';
 import { CART_PAGE_VIEW, CartPageView } from '../../models/page-view.model';
@@ -13,7 +13,6 @@ import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
   imports: [NgIcon, RouterLink, I18nPluralPipe],
   viewProviders: [provideIcons({ heroArrowRight, heroMinus, heroPlus, heroTrash })],
   templateUrl: './cart-dishes-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartDishesList {
   readonly changeViewSelected = output<CartPageView>();

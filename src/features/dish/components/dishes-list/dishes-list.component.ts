@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -24,7 +23,6 @@ import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
   imports: [NgIcon, RouterLink, DishCardComponent],
   templateUrl: './dishes-list.component.html',
   viewProviders: [provideIcons({ heroPencil, heroTrash, heroPlus })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishesListComponent {
   protected readonly dishService = inject(DishService);

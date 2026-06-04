@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -22,7 +21,6 @@ import { RouterLink } from '@angular/router';
   imports: [NgIcon, CartProgress, NgClass, FormatIngredientSourcesPipe, RouterLink],
   viewProviders: [provideIcons({ heroArrowLeft })],
   templateUrl: './cart-ingredients-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartIngredientsList {
   readonly changeViewSelected = output<CartPageView>();

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SettingsService } from '../../../../core/services/settings.service';
 import { Settings } from '../../models/settings.model';
@@ -10,7 +10,6 @@ import { ThemeService } from '../../../../core/services/theme.service';
   selector: 'app-settings',
   imports: [ReactiveFormsModule, ToggleSwitchComponent],
   templateUrl: './settings.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SettingsComponent implements OnInit {
   private readonly settingsService = inject(SettingsService);

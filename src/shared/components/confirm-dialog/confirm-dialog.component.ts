@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroPlus } from '@ng-icons/heroicons/outline';
 
@@ -8,7 +8,6 @@ import { heroPlus } from '@ng-icons/heroicons/outline';
   viewProviders: [provideIcons({ heroPlus })],
   templateUrl: './confirm-dialog.component.html',
   styleUrl: './confirm-dialog.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     popover: 'manual',
   },

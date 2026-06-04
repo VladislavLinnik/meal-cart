@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { CART_PAGE_VIEW, CartPageView } from '../../models/page-view.model';
 import { CartDishesList } from '../cart-dishes-list/cart-dishes-list';
 import { CartIngredientsList } from '../cart-ingredients-list/cart-ingredients-list';
@@ -8,7 +8,6 @@ import { STORAGE_KEY } from '../../../../core/models/storage.model';
   selector: 'app-cart-page',
   imports: [CartDishesList, CartIngredientsList],
   templateUrl: './cart-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartPageComponent {
   readonly pageView = signal<CartPageView>(CART_PAGE_VIEW.Dish);

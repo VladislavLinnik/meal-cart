@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   contentChildren,
   input,
@@ -13,7 +12,6 @@ import { EMPTY, map, merge, of, switchMap } from 'rxjs';
   selector: 'app-form-errors',
   imports: [],
   templateUrl: './form-errors.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormErrorsComponent {
   readonly field = input.required<AbstractControl | null>();

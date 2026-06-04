@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowLeft, heroPlus } from '@ng-icons/heroicons/outline';
 import { Router, RouterLink } from '@angular/router';
@@ -23,7 +23,6 @@ import { FormErrorComponent } from '../../../../shared/components/form-error/for
   ],
   viewProviders: [provideIcons({ heroArrowLeft, heroPlus })],
   templateUrl: './dish-form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishFormComponent implements OnInit {
   readonly id = input<string>();
