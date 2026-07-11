@@ -14,14 +14,7 @@ export class CartPageComponent {
   readonly CART_PAGE_VIEW = CART_PAGE_VIEW;
 
   constructor() {
-    const storagePageView = this.getStoragePageView();
-
-    const isValidPage = Object.values(CART_PAGE_VIEW).includes(storagePageView);
-    if (isValidPage) this.changePageView(storagePageView);
-
-    effect(() => {
-      localStorage.setItem(STORAGE_KEY.CartView, JSON.stringify(this.pageView()));
-    });
+    this.setPageView();
   }
 
   changePageView(pageView: CartPageView): void {
@@ -40,5 +33,16 @@ export class CartPageComponent {
 
       return null;
     }
+  }
+
+  private setPageView(): void {
+    const storagePageView = this.getStoragePageView();
+
+    const isValidPage = Object.values(CART_PAGE_VIEW).includes(storagePageView);
+    if (isValidPage) this.changePageView(storagePageView);
+
+    effect(() => {
+      localStorage.setItem(STORAGE_KEY.CartView, JSON.stringify(this.pageView()));
+    });
   }
 }
