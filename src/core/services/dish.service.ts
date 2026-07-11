@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Service, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 import { UNIT_MEASUREMENT, UnitMeasurement } from '../models/ingredient.model';
 import { KeyValue } from '@angular/common';
@@ -6,9 +6,7 @@ import { Dish } from '../models/dish.model';
 import { STORAGE_KEY } from '../models/storage.model';
 import { CartService } from './cart.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class DishService {
   private readonly storageService = inject(StorageService);
   private readonly cartService = inject(CartService);

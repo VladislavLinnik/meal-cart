@@ -1,6 +1,6 @@
-import { DOCUMENT, inject, Injectable, signal } from '@angular/core';
+import { DOCUMENT, inject, Service, signal } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ThemeService {
   private readonly isDark = signal(false);
   readonly document = inject(DOCUMENT);

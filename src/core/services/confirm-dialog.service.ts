@@ -3,13 +3,13 @@ import {
   createComponent,
   EnvironmentInjector,
   inject,
-  Injectable,
+  Service,
 } from '@angular/core';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { SettingsService } from './settings.service';
 import { ConfirmConfig } from '../models/confirm-dialog.model';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ConfirmDialogService {
   private appRef = inject(ApplicationRef);
   private injector = inject(EnvironmentInjector);

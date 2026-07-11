@@ -1,11 +1,9 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Service, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 import { STORAGE_KEY } from '../models/storage.model';
 import { Settings } from '../../features/settings/models/settings.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class SettingsService {
   readonly DEFAULT_SETTINGS: Settings = {
     confirmToRemove: true,

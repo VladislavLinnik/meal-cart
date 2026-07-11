@@ -1,13 +1,11 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 import { CartDish } from '../models/cart.model';
 import { Dish } from '../models/dish.model';
 import { STORAGE_KEY } from '../models/storage.model';
 import { Ingredient } from '../models/ingredient.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class CartService {
   private readonly storageService = inject(StorageService);
 
