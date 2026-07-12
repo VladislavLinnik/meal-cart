@@ -1,3 +1,4 @@
+/* eslint-disable local/no-cyrillic-strings */
 export const UNIT_MEASUREMENT = {
   Kg: 'кг',
   Gr: 'г',
@@ -6,6 +7,7 @@ export const UNIT_MEASUREMENT = {
   Piece: 'шт',
   Pack: 'уп',
 } as const;
+/* eslint-enable local/no-cyrillic-strings */
 
 export type Unit = keyof typeof UNIT_MEASUREMENT;
 

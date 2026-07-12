@@ -28,6 +28,7 @@ export const appConfig: ApplicationConfig = {
       config: {
         availableLangs: [
           { id: 'en', label: 'English' },
+          // eslint-disable-next-line local/no-cyrillic-strings
           { id: 'uk', label: 'Українська' },
         ],
         defaultLang: 'en',

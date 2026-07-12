@@ -15,8 +15,8 @@ export const SETTINGS_KEYS = {
   Language: 'language',
 } as const;
 
-export type Settings = {
+export interface Settings {
   [SETTINGS_KEYS.ConfirmToRemove]: boolean;
   [SETTINGS_KEYS.DarkTheme]: boolean;
   [SETTINGS_KEYS.Language]: Language;
-};
+}
