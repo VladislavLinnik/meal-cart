@@ -11,7 +11,10 @@ import { heroArrowLeft } from '@ng-icons/heroicons/outline';
 import { CartProgress } from '../cart-progress/cart-progress';
 import { CartDish } from '../../../../core/models/cart.model';
 import { CartService } from '../../../../core/services/cart.service';
-import { Ingredient, UNIT_MEASUREMENT } from '../../../../core/models/ingredient.model';
+import {
+  Ingredient,
+  UNIT_TRANSLATION_KEYS,
+} from '../../../../core/models/ingredient.model';
 import { NgClass } from '@angular/common';
 import { FormatIngredientSourcesPipe } from '../../pipes/format-ingredient-sources.pipe';
 import { RouterLink } from '@angular/router';
@@ -29,7 +32,7 @@ export class CartIngredientsList {
   readonly cart: Signal<CartDish[]> = this.cartService.cart;
 
   readonly CART_PAGE_VIEW = CART_PAGE_VIEW;
-  readonly UNIT_MEASUREMENT = UNIT_MEASUREMENT;
+  protected readonly UNIT_TRANSLATION_KEYS = UNIT_TRANSLATION_KEYS;
 
   readonly progress = computed(() => {
     const items = this.ingredients();

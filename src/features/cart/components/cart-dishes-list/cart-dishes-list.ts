@@ -5,13 +5,12 @@ import { CART_PAGE_VIEW, CartPageView } from '../../models/page-view.model';
 import { CartService } from '../../../../core/services/cart.service';
 import { CartDish } from '../../../../core/models/cart.model';
 import { RouterLink } from '@angular/router';
-import { I18nPluralPipe } from '@angular/common';
 import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
-import { TranslocoPipe } from '@jsverse/transloco';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-cart-dishes-list',
-  imports: [NgIcon, RouterLink, I18nPluralPipe, TranslocoPipe],
+  imports: [NgIcon, RouterLink, TranslocoPipe],
   viewProviders: [provideIcons({ heroArrowRight, heroMinus, heroPlus, heroTrash })],
   templateUrl: './cart-dishes-list.html',
 })
@@ -20,28 +19,21 @@ export class CartDishesList {
   readonly cartService = inject(CartService);
   readonly cart: Signal<CartDish[]> = this.cartService.cart;
   private readonly confirmChecker = injectConfirmChecker();
+  private readonly translocoService = inject(TranslocoService);
 
   readonly CART_PAGE_VIEW = CART_PAGE_VIEW;
 
-  pluralMap: { [k: string]: string } = {
-    '=1': '# інгредієнт',
-    '=2': '# інгредієнта',
-    '=3': '# інгредієнта',
-    '=4': '# інгредієнта',
-    other: '# інгредієнтів',
-  };
-
   removeAll(): void {
     this.confirmChecker(() => this.cartService.clear(), {
-      message: 'Видалити всі страви з кошика?',
-      confirmText: 'Видалити',
+      message: this.translocoService.translate('cart.removeAllConfirmMessage'),
+      confirmText: this.translocoService.translate('cart.removeAllConfirmButton'),
     });
-  };
+  }
 
   removeFromCart(id: string): void {
     this.confirmChecker(() => this.cartService.removeDish(id), {
-      message: 'Видалити страву з кошика?',
-      confirmText: 'Видалити',
+      message: this.translocoService.translate('cart.removeItemConfirmMessage'),
+      confirmText: this.translocoService.translate('cart.removeItemConfirmButton'),
     });
   }
 

@@ -1,15 +1,20 @@
 import { inject, Service, signal } from '@angular/core';
 import { StorageService } from './storage.service';
-import { UNIT_MEASUREMENT, UnitMeasurement } from '../models/ingredient.model';
+import {
+  Unit,
+  UNIT_TRANSLATION_KEYS,
+} from '../models/ingredient.model';
 import { KeyValue } from '@angular/common';
 import { Dish } from '../models/dish.model';
 import { STORAGE_KEY } from '../models/storage.model';
 import { CartService } from './cart.service';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Service()
 export class DishService {
   private readonly storageService = inject(StorageService);
   private readonly cartService = inject(CartService);
+  private readonly translocoService = inject(TranslocoService);
 
   private _dishes = signal<Dish[]>([]);
   readonly dishes = this._dishes.asReadonly();
@@ -42,10 +47,10 @@ export class DishService {
     this.saveToStorage();
   }
 
-  getUnitMeasurements(): KeyValue<string, UnitMeasurement>[] {
-    return Object.entries(UNIT_MEASUREMENT).map(([key, value]) => ({
-      value: value.toLowerCase() as UnitMeasurement,
+  getUnitMeasurements(): KeyValue<Unit, string>[] {
+    return (Object.keys(UNIT_TRANSLATION_KEYS) as Unit[]).map((key) => ({
       key,
+      value: this.translocoService.translate(UNIT_TRANSLATION_KEYS[key]),
     }));
   }
 

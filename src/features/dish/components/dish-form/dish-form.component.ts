@@ -3,7 +3,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowLeft, heroPlus } from '@ng-icons/heroicons/outline';
 import { Router, RouterLink } from '@angular/router';
 import { DishService } from '../../../../core/services/dish.service';
-import { Ingredient, UnitMeasurement } from '../../../../core/models/ingredient.model';
+import { Ingredient, Unit } from '../../../../core/models/ingredient.model';
 import { KeyValue, NgClass } from '@angular/common';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dish } from '../../../../core/models/dish.model';
@@ -34,7 +34,7 @@ export class DishFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   readonly asGroup = asGroup;
-  readonly units: KeyValue<string, UnitMeasurement>[] = this.dishService.getUnitMeasurements();
+  readonly units: KeyValue<Unit, string>[] = this.dishService.getUnitMeasurements();
   form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     ingredients: this.fb.array([]),

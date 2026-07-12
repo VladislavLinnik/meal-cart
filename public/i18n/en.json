@@ -17,14 +17,21 @@
     "addButton": "Add",
     "shoppingListTitle": "Shopping list",
     "progressLabel": "Progress",
-    "purchasedSuffix": "purchased"
+    "purchasedSuffix": "purchased",
+    "removeAllConfirmMessage": "Remove all dishes from the cart?",
+    "removeAllConfirmButton": "Remove",
+    "removeItemConfirmMessage": "Remove this dish from the cart?",
+    "removeItemConfirmButton": "Remove",
+    "ingredientsCount": "{count, plural, one {# ingredient} other {# ingredients}}"
   },
   "dishes": {
     "title": "My dishes",
     "createButton": "Create",
     "searchPlaceholder": "Search dish...",
     "nothingFound": "Nothing found",
-    "emptyStateMessage": "Create a dish to get started"
+    "emptyStateMessage": "Create a dish to get started",
+    "removeConfirmMessage": "Remove this dish?",
+    "removeConfirmButton": "Remove"
   },
   "dishForm": {
     "editTitle": "Edit dish",
@@ -46,5 +53,19 @@
     "cancelButton": "Cancel",
     "saveButton": "Save",
     "addButton": "Add"
+  },
+  "confirmDialog": {
+    "defaultTitle": "Confirmation",
+    "defaultMessage": "Are you sure?",
+    "defaultConfirmText": "Confirm",
+    "defaultCancelText": "Cancel"
+  },
+  "units": {
+    "kg": "kg",
+    "gr": "g",
+    "lt": "l",
+    "ml": "ml",
+    "piece": "pc",
+    "pack": "pack"
   }
 }

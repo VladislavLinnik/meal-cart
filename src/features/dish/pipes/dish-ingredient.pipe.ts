@@ -1,11 +1,18 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Ingredient, UNIT_MEASUREMENT } from '../../../core/models/ingredient.model';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import {
+  Ingredient,
+  UNIT_TRANSLATION_KEYS,
+} from '../../../core/models/ingredient.model';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Pipe({
   name: 'appDishIngredient',
 })
 export class DishIngredientPipe implements PipeTransform {
+  private readonly translocoService = inject(TranslocoService);
+
   transform(value: Ingredient): string {
-    return `${value.name} ${value.amount}${UNIT_MEASUREMENT[value.unit]}`;
+    const unitLabel = this.translocoService.translate(UNIT_TRANSLATION_KEYS[value.unit]);
+    return `${value.name} ${value.amount}${unitLabel}`;
   }
 }

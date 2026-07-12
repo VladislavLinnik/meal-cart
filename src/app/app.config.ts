@@ -16,6 +16,7 @@ import { ThemeService } from '../core/services/theme.service';
 import { provideHttpClient } from '@angular/common/http';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco, TranslocoService } from '@jsverse/transloco';
+import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +36,7 @@ export const appConfig: ApplicationConfig = {
       },
       loader: TranslocoHttpLoader,
     }),
+    provideTranslocoMessageformat(),
     provideAppInitializer(() => {
       const settingsService = inject(SettingsService);
       const themeService = inject(ThemeService);

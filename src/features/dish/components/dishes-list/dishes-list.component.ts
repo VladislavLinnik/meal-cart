@@ -1,23 +1,15 @@
-import {
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroPencil, heroPlus, heroTrash } from '@ng-icons/heroicons/outline';
 import { RouterLink } from '@angular/router';
 import { Dish } from '../../../../core/models/dish.model';
 import { DishService } from '../../../../core/services/dish.service';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  Subject,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CartService } from '../../../../core/services/cart.service';
 import { DishCardComponent } from '../dish-card/dish-card.component';
 import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
-import { TranslocoPipe } from '@jsverse/transloco';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-dishes-list',
@@ -28,6 +20,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 export class DishesListComponent {
   protected readonly dishService = inject(DishService);
   private readonly cartService = inject(CartService);
+  private readonly translocoService = inject(TranslocoService);
   private readonly searchSubject = new Subject<string>();
 
   private readonly confirmChecker = injectConfirmChecker();
@@ -56,8 +49,8 @@ export class DishesListComponent {
 
   remove(id: string): void {
     this.confirmChecker(() => this.dishService.removeDish(id), {
-      message: 'Видалити страву?',
-      confirmText: 'Видалити',
+      message: this.translocoService.translate('dishes.removeConfirmMessage'),
+      confirmText: this.translocoService.translate('dishes.removeConfirmButton'),
     });
   }
 

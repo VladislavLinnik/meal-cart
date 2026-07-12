@@ -17,14 +17,21 @@
     "addButton": "Додати",
     "shoppingListTitle": "Список покупок",
     "progressLabel": "Прогрес",
-    "purchasedSuffix": "придбано"
+    "purchasedSuffix": "придбано",
+    "removeAllConfirmMessage": "Видалити всі страви з кошика?",
+    "removeAllConfirmButton": "Видалити",
+    "removeItemConfirmMessage": "Видалити страву з кошика?",
+    "removeItemConfirmButton": "Видалити",
+    "ingredientsCount": "{count, plural, one {# інгредієнт} few {# інгредієнти} many {# інгредієнтів} other {# інгредієнта}}"
   },
   "dishes": {
     "title": "Мої страви",
     "createButton": "Створити",
     "searchPlaceholder": "Пошук страви...",
     "nothingFound": "Нічого не знайдено",
-    "emptyStateMessage": "Створіть страву, щоб розпочати"
+    "emptyStateMessage": "Створіть страву, щоб розпочати",
+    "removeConfirmMessage": "Видалити страву?",
+    "removeConfirmButton": "Видалити"
   },
   "dishForm": {
     "editTitle": "Змінити страву",
@@ -46,5 +53,19 @@
     "cancelButton": "Скасувати",
     "saveButton": "Зберегти",
     "addButton": "Додати"
+  },
+  "confirmDialog": {
+    "defaultTitle": "Підтвердження",
+    "defaultMessage": "Підтверджуєте?",
+    "defaultConfirmText": "Підтвердити",
+    "defaultCancelText": "Скасувати"
+  },
+  "units": {
+    "kg": "кг",
+    "gr": "г",
+    "lt": "л",
+    "ml": "мл",
+    "piece": "шт",
+    "pack": "уп"
   }
 }

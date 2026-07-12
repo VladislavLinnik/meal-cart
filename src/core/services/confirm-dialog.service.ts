@@ -5,6 +5,7 @@ import {
   inject,
   Service,
 } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import { SettingsService } from './settings.service';
 import { ConfirmConfig } from '../models/confirm-dialog.model';
@@ -14,6 +15,7 @@ export class ConfirmDialogService {
   private appRef = inject(ApplicationRef);
   private injector = inject(EnvironmentInjector);
   private settingsService = inject(SettingsService);
+  private translocoService = inject(TranslocoService);
 
   confirm(config: ConfirmConfig & { onConfirm: () => void }): void {
     const settings = this.settingsService.get();
@@ -26,10 +28,19 @@ export class ConfirmDialogService {
       environmentInjector: this.injector,
     });
 
-    ref.setInput('title', config.title ?? 'Підтвердження');
-    ref.setInput('message', config.message ?? 'Підтверджуєте?');
-    ref.setInput('confirmText', config.confirmText ?? 'Підтвердити');
-    ref.setInput('cancelText', config.cancelText ?? 'Скасувати');
+    ref.setInput('title', config.title ?? this.translocoService.translate('confirmDialog.defaultTitle'));
+    ref.setInput(
+      'message',
+      config.message ?? this.translocoService.translate('confirmDialog.defaultMessage'),
+    );
+    ref.setInput(
+      'confirmText',
+      config.confirmText ?? this.translocoService.translate('confirmDialog.defaultConfirmText'),
+    );
+    ref.setInput(
+      'cancelText',
+      config.cancelText ?? this.translocoService.translate('confirmDialog.defaultCancelText'),
+    );
 
     const element = ref.location.nativeElement as HTMLElement;
 
