@@ -15,10 +15,11 @@ import { Ingredient, UNIT_MEASUREMENT } from '../../../../core/models/ingredient
 import { NgClass } from '@angular/common';
 import { FormatIngredientSourcesPipe } from '../../pipes/format-ingredient-sources.pipe';
 import { RouterLink } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-cart-ingredients-list',
-  imports: [NgIcon, CartProgress, NgClass, FormatIngredientSourcesPipe, RouterLink],
+  imports: [NgIcon, CartProgress, NgClass, FormatIngredientSourcesPipe, RouterLink, TranslocoPipe],
   viewProviders: [provideIcons({ heroArrowLeft })],
   templateUrl: './cart-ingredients-list.html',
 })

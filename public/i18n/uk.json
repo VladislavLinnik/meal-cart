@@ -1,0 +1,50 @@
+{
+  "nav": {
+    "dishes": "Страви",
+    "cart": "Кошик"
+  },
+  "settings": {
+    "confirmToRemoveLabel": "Підтвердження на видалення (модальне вікно)",
+    "darkThemeLabel": "Темна тема",
+    "languageLabel": "Виберіть мову"
+  },
+  "cart": {
+    "title": "Кошик",
+    "clearAll": "Очистити",
+    "dishesTitle": "Страви",
+    "goToShoppingList": "Перейти до списку покупок",
+    "emptyMessage": "Немає доданих страв",
+    "addButton": "Додати",
+    "shoppingListTitle": "Список покупок",
+    "progressLabel": "Прогрес",
+    "purchasedSuffix": "придбано"
+  },
+  "dishes": {
+    "title": "Мої страви",
+    "createButton": "Створити",
+    "searchPlaceholder": "Пошук страви...",
+    "nothingFound": "Нічого не знайдено",
+    "emptyStateMessage": "Створіть страву, щоб розпочати"
+  },
+  "dishForm": {
+    "editTitle": "Змінити страву",
+    "newTitle": "Нова страва",
+    "backToDishes": "Назад до страв",
+    "nameLabel": "Назва страви",
+    "namePlaceholder": "Введіть назву страви...",
+    "nameRequired": "Введіть назву страви",
+    "nameMinLength": "Мінімум 2 символа",
+    "ingredientsTitle": "Інгредієнти",
+    "ingredientNamePlaceholder": "Інгредієнт",
+    "ingredientNameRequired": "Введіть назву інгрідієнта",
+    "ingredientNameMaxLength": "Максимум 50 символів",
+    "amountPlaceholder": "Кількість",
+    "amountRequired": "Введіть кількість",
+    "amountPattern": "Значення повинно бути числом",
+    "unitRequired": "Виберіть міру",
+    "addIngredientButton": "Інгредієнт",
+    "cancelButton": "Скасувати",
+    "saveButton": "Зберегти",
+    "addButton": "Додати"
+  }
+}

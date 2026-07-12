@@ -1,13 +1,18 @@
 import { inject, Service, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 import { STORAGE_KEY } from '../models/storage.model';
-import { Settings } from '../../features/settings/models/settings.model';
+import {
+  LANGUAGES,
+  Settings,
+  SETTINGS_KEYS,
+} from '../../features/settings/models/settings.model';
 
 @Service()
 export class SettingsService {
   readonly DEFAULT_SETTINGS: Settings = {
-    confirmToRemove: true,
-    darkTheme: false,
+    [SETTINGS_KEYS.ConfirmToRemove]: true,
+    [SETTINGS_KEYS.DarkTheme]: false,
+    [SETTINGS_KEYS.Language]: LANGUAGES.English,
   };
 
   readonly isDarkMode = signal<boolean>(false);

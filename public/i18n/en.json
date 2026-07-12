@@ -1,0 +1,50 @@
+{
+  "nav": {
+    "dishes": "Dishes",
+    "cart": "Cart"
+  },
+  "settings": {
+    "confirmToRemoveLabel": "Confirm before removing (modal window)",
+    "darkThemeLabel": "Dark theme",
+    "languageLabel": "Select language"
+  },
+  "cart": {
+    "title": "Cart",
+    "clearAll": "Clear all",
+    "dishesTitle": "Dishes",
+    "goToShoppingList": "Go to shopping list",
+    "emptyMessage": "No dishes added yet",
+    "addButton": "Add",
+    "shoppingListTitle": "Shopping list",
+    "progressLabel": "Progress",
+    "purchasedSuffix": "purchased"
+  },
+  "dishes": {
+    "title": "My dishes",
+    "createButton": "Create",
+    "searchPlaceholder": "Search dish...",
+    "nothingFound": "Nothing found",
+    "emptyStateMessage": "Create a dish to get started"
+  },
+  "dishForm": {
+    "editTitle": "Edit dish",
+    "newTitle": "New dish",
+    "backToDishes": "Back to dishes",
+    "nameLabel": "Dish name",
+    "namePlaceholder": "Enter dish name...",
+    "nameRequired": "Enter dish name",
+    "nameMinLength": "Minimum 2 characters",
+    "ingredientsTitle": "Ingredients",
+    "ingredientNamePlaceholder": "Ingredient",
+    "ingredientNameRequired": "Enter ingredient name",
+    "ingredientNameMaxLength": "Maximum 50 characters",
+    "amountPlaceholder": "Amount",
+    "amountRequired": "Enter amount",
+    "amountPattern": "Value must be a number",
+    "unitRequired": "Select a unit",
+    "addIngredientButton": "Ingredient",
+    "cancelButton": "Cancel",
+    "saveButton": "Save",
+    "addButton": "Add"
+  }
+}

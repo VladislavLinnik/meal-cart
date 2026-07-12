@@ -1,25 +1,25 @@
 <div class="flex items-center justify-between mb-5">
-  <h2 class="text-lg font-bold">{{ isEditMode() ? 'Змінити страву' : 'Нова страва' }}</h2>
+  <h2 class="text-lg font-bold">{{ (isEditMode() ? 'dishForm.editTitle' : 'dishForm.newTitle') | transloco }}</h2>
   <button class="btn px-2 py-1 items-center"
           routerLink="/dishes">
     <ng-icon class="mr-2" name="heroArrowLeft" />
-    Назад до страв
+    {{ 'dishForm.backToDishes' | transloco }}
   </button>
 </div>
 
 <form [formGroup]="form">
   <div class="mb-5">
-    <label for="dishName" class="block mb-2 cursor-pointer">Назва страви</label>
+    <label for="dishName" class="block mb-2 cursor-pointer">{{ 'dishForm.nameLabel' | transloco }}</label>
     <input id="dishName" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
-           type="text" placeholder="Введіть назву страви..."
+           type="text" [placeholder]="'dishForm.namePlaceholder' | transloco"
            formControlName="name">
     <app-form-errors [field]="form.get('name')">
-      <app-form-error type="required" message="Введіть назву страви" />
-      <app-form-error type="minlength" message="Мінімум 2 символа" />
+      <app-form-error type="required" [message]="'dishForm.nameRequired' | transloco" />
+      <app-form-error type="minlength" [message]="'dishForm.nameMinLength' | transloco" />
     </app-form-errors>
   </div>
 
-  <h3 class="text-lg mb-2">Інгредієнти</h3>
+  <h3 class="text-lg mb-2">{{ 'dishForm.ingredientsTitle' | transloco }}</h3>
   <div formArrayName="ingredients">
     @for (group of ingredients.controls; track $index) {
       <div class="grid grid-cols-[2fr_1fr_1fr] items-start gap-3 mb-3"
@@ -28,20 +28,20 @@
         <div>
           <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
                  formControlName="name"
-                 type="text" placeholder="Інгредієнт" maxlength="50">
+                 type="text" [placeholder]="'dishForm.ingredientNamePlaceholder' | transloco" maxlength="50">
           <app-form-errors [field]="asGroup(group).get('name')">
-            <app-form-error type="required" message="Введіть назву інгрідієнта" />
-            <app-form-error type="maxlength" message="Максимум 50 символів" />
+            <app-form-error type="required" [message]="'dishForm.ingredientNameRequired' | transloco" />
+            <app-form-error type="maxlength" [message]="'dishForm.ingredientNameMaxLength' | transloco" />
           </app-form-errors>
         </div>
         <div>
           <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                  formControlName="amount"
                  type="number" inputmode="decimal" pattern="[0-9]+([.,][0-9]+)?" min="0"
-                 placeholder="Кількість">
+                 [placeholder]="'dishForm.amountPlaceholder' | transloco">
           <app-form-errors [field]="asGroup(group).get('amount')">
-            <app-form-error type="required" message="Введіть кількість" />
-            <app-form-error type="pattern" message="Значення повинно бути числом" />
+            <app-form-error type="required" [message]="'dishForm.amountRequired' | transloco" />
+            <app-form-error type="pattern" [message]="'dishForm.amountPattern' | transloco" />
           </app-form-errors>
         </div>
         <div>
@@ -52,7 +52,7 @@
             }
           </select>
           <app-form-errors [field]="asGroup(group).get('unit')">
-            <app-form-error type="required" message="Виберіть міру" />
+            <app-form-error type="required" [message]="'dishForm.unitRequired' | transloco" />
           </app-form-errors>
         </div>
         @if (ingredients.controls.length > 1) {
@@ -70,14 +70,14 @@
           [disabled]="ingredients.invalid"
           (click)="addIngredient()">
     <ng-icon name="heroPlus"></ng-icon>
-    Інгредієнт
+    {{ 'dishForm.addIngredientButton' | transloco }}
   </button>
 </form>
 
 <div class="flex justify-end gap-4">
   <button class="btn-dismiss py-1 px-2"
-          routerLink="/dishes">Скасувати</button>
+          routerLink="/dishes">{{ 'dishForm.cancelButton' | transloco }}</button>
   <button class="btn text-white dark:text-white! bg-blue-500! disabled:cursor-not-allowed! disabled:bg-gray-400! hover:bg-blue-600! py-1 px-2"
           [disabled]="form.invalid"
-          (click)="save()">{{ isEditMode() ? 'Зберегти' : 'Додати' }}</button>
+          (click)="save()">{{ (isEditMode() ? 'dishForm.saveButton' : 'dishForm.addButton') | transloco }}</button>
 </div>

@@ -1,6 +1,20 @@
 <div class="flex flex-col justify-center gap-6" [formGroup]="form">
   <app-toggle-switch formControlName="confirmToRemove"
-                     [label]="'Підтвердження на видалення (модальне вікно)'" />
+                     [label]="'settings.confirmToRemoveLabel' | transloco" />
   <app-toggle-switch formControlName="darkTheme"
-                     [label]="'Темна тема'" />
+                     [label]="'settings.darkThemeLabel' | transloco" />
+  <div>
+    <label for="language" class="relative self-center inline-flex items-center cursor-pointer text-gray-700 dark:text-white">
+      {{ 'settings.languageLabel' | transloco }}
+    </label>
+    <select id="language" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+            formControlName="language">
+      @for (lang of languages; track lang.id) {
+        <option [value]="lang.id"
+                [selected]="lang.id === activeLang">
+          {{ lang.label }}
+        </option>
+      }
+    </select>
+  </div>
 </div>

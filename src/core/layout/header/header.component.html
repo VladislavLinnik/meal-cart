@@ -5,14 +5,16 @@
       <li>
         <a routerLink="dishes"
            routerLinkActive="bg-gray-200 dark:bg-white dark:text-gray-500"
-           class="flex items-center hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-white dark:hover:text-gray-500 dark:focus:bg-white dark:focus:text-gray-500 p-2 rounded cursor-pointer">Страви</a>
+           class="flex items-center hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-white dark:hover:text-gray-500 dark:focus:bg-white dark:focus:text-gray-500 p-2 rounded cursor-pointer">
+          {{ 'nav.dishes' | transloco }}
+        </a>
       </li>
       <li>
         <a routerLink="cart"
            routerLinkActive="bg-gray-200 dark:bg-white dark:text-gray-500"
            class="flex items-center  hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-white dark:hover:text-gray-500 dark:focus:bg-white dark:focus:text-gray-500 p-2 rounded cursor-pointer">
           <ng-icon name="heroShoppingCart" />
-          Кошик
+          {{ 'nav.cart' | transloco }}
           @if (cartService.totalDishesInCart()) {
             <span class="ml-1 inline-flex items-center justify-center rounded-full bg-green-500 text-white size-6 text-xs">{{ cartService.totalDishesInCart() }}</span>
           }

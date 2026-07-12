@@ -7,10 +7,11 @@ import { CartDish } from '../../../../core/models/cart.model';
 import { RouterLink } from '@angular/router';
 import { I18nPluralPipe } from '@angular/common';
 import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-cart-dishes-list',
-  imports: [NgIcon, RouterLink, I18nPluralPipe],
+  imports: [NgIcon, RouterLink, I18nPluralPipe, TranslocoPipe],
   viewProviders: [provideIcons({ heroArrowRight, heroMinus, heroPlus, heroTrash })],
   templateUrl: './cart-dishes-list.html',
 })

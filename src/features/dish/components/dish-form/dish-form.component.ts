@@ -10,6 +10,7 @@ import { Dish } from '../../../../core/models/dish.model';
 import { asGroup } from '../../../../core/utils/form.helper';
 import { FormErrorsComponent } from '../../../../shared/components/form-errors/form-errors.component';
 import { FormErrorComponent } from '../../../../shared/components/form-error/form-error.component';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-dish-form',
@@ -20,6 +21,7 @@ import { FormErrorComponent } from '../../../../shared/components/form-error/for
     NgClass,
     FormErrorsComponent,
     FormErrorComponent,
+    TranslocoPipe,
   ],
   viewProviders: [provideIcons({ heroArrowLeft, heroPlus })],
   templateUrl: './dish-form.component.html',

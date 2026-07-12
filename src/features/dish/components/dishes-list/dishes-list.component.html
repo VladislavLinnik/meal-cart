@@ -1,10 +1,10 @@
 <div class="flex items-center justify-between mb-5">
-  <h2 class="text-lg font-bold">Мої страви</h2>
+  <h2 class="text-lg font-bold">{{ 'dishes.title' | transloco }}</h2>
   @if (dishService.dishes().length) {
     <button class="btn items-center py-1 px-3"
             routerLink="new">
       <ng-icon class="mr-1" name="heroPlus" />
-      Створити
+      {{ 'dishes.createButton' | transloco }}
     </button>
   }
 </div>
@@ -13,16 +13,16 @@
   <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-4 mb-5" type="text"
          id="dishSearch"
          (input)="onSearch($any($event.target).value)"
-         placeholder="Пошук страви...">
+         [placeholder]="'dishes.searchPlaceholder' | transloco">
   @if (!filteredDishes().length) {
-    <p class="text-center text-gray-500 dark:text-white text-sm">Нічого не знайдено</p>
+    <p class="text-center text-gray-500 dark:text-white text-sm">{{ 'dishes.nothingFound' | transloco }}</p>
   }
 } @else {
-  <p class="text-center text-gray-500 text-sm mb-2">Створіть страву, щоб розпочати</p>
+  <p class="text-center text-gray-500 text-sm mb-2">{{ 'dishes.emptyStateMessage' | transloco }}</p>
   <button class="mx-auto btn items-center py-1 px-3"
           routerLink="new">
     <ng-icon class="mr-1" name="heroPlus" />
-    Створити
+    {{ 'dishes.createButton' | transloco }}
   </button>
 }
 

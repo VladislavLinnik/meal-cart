@@ -1,10 +1,10 @@
 <div class="flex items-center justify-between mb-5">
-  <h2 class="text-lg font-bold">Список покупок</h2>
+  <h2 class="text-lg font-bold">{{ 'cart.shoppingListTitle' | transloco }}</h2>
   @if (cart().length) {
     <button class="btn items-center py-1 px-3"
             (click)="changeViewSelected.emit(CART_PAGE_VIEW.Dish)">
       <ng-icon class="mr-1" name="heroArrowLeft" />
-      Страви
+      {{ 'cart.dishesTitle' | transloco }}
     </button>
   }
 </div>
@@ -12,8 +12,8 @@
 @if (cart().length) {
   <app-cart-progress [percent]="progress().percent" class="block mb-5">
     <div class="flex justify-between items-center mb-1 text-sm">
-      <span>Прогрес</span>
-      <span><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span> придбано</span>
+      <span>{{ 'cart.progressLabel' | transloco }}</span>
+      <span><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span> {{ 'cart.purchasedSuffix' | transloco }}</span>
     </div>
   </app-cart-progress>
 
@@ -35,10 +35,10 @@
     }
   </ul>
 } @else {
-  <p class="text-center text-gray-500 text-sm mb-2">Немає доданих страв</p>
+  <p class="text-center text-gray-500 text-sm mb-2">{{ 'cart.emptyMessage' | transloco }}</p>
   <button class="mx-auto btn items-center py-1 px-3"
           routerLink="dishes">
     <ng-icon class="mr-1" name="heroPlus" />
-    Додати
+    {{ 'cart.addButton' | transloco }}
   </button>
 }

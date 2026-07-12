@@ -17,10 +17,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { CartService } from '../../../../core/services/cart.service';
 import { DishCardComponent } from '../dish-card/dish-card.component';
 import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-dishes-list',
-  imports: [NgIcon, RouterLink, DishCardComponent],
+  imports: [NgIcon, RouterLink, DishCardComponent, TranslocoPipe],
   templateUrl: './dishes-list.component.html',
   viewProviders: [provideIcons({ heroPencil, heroTrash, heroPlus })],
 })
@@ -54,9 +55,7 @@ export class DishesListComponent {
   }
 
   remove(id: string): void {
-    this.confirmChecker(
-      () => this.dishService.removeDish(id),
-      {
+    this.confirmChecker(() => this.dishService.removeDish(id), {
       message: 'Видалити страву?',
       confirmText: 'Видалити',
     });
