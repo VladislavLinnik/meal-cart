@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { formatNumber } from '@angular/common';
 import { TranslocoService } from '@jsverse/transloco';
 import { Dish } from '../models/dish.model';
 import { UNIT_TRANSLATION_KEYS } from '../models/ingredient.model';
@@ -15,7 +16,7 @@ export class DishClipboardService {
         const quantity = dish.quantity ?? 1;
         const title = dish.quantity === undefined ? dish.name : `${dish.name} ×${quantity}`;
         const ingredients = dish.ingredients.map((ingredient) => {
-          const amount = Number((ingredient.amount * quantity).toPrecision(15));
+          const amount = formatNumber(ingredient.amount * quantity, 'en-US', '1.0-2');
           const unit = this.translocoService.translate(UNIT_TRANSLATION_KEYS[ingredient.unit]);
           return `- ${ingredient.name}: ${amount} ${unit}`;
         });

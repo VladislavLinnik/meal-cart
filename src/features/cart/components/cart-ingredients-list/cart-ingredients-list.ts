@@ -6,7 +6,7 @@ import { CartProgress } from '../cart-progress/cart-progress';
 import { CartDish } from '../../../../core/models/cart.model';
 import { CartService } from '../../../../core/services/cart.service';
 import { Ingredient, UNIT_TRANSLATION_KEYS } from '../../../../core/models/ingredient.model';
-import { NgClass } from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import { FormatIngredientSourcesPipe } from '../../pipes/format-ingredient-sources.pipe';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -18,6 +18,7 @@ import { CopyDishesButtonComponent } from '../../../../shared/components/copy-di
     NgIcon,
     CartProgress,
     NgClass,
+    DecimalPipe,
     FormatIngredientSourcesPipe,
     RouterLink,
     TranslocoPipe,

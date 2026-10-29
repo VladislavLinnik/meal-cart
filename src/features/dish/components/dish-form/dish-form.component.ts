@@ -11,6 +11,7 @@ import { asGroup } from '../../../../core/utils/form.helper';
 import { FormErrorsComponent } from '../../../../shared/components/form-errors/form-errors.component';
 import { FormErrorComponent } from '../../../../shared/components/form-error/form-error.component';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { SettingsService } from '../../../../core/services/settings.service';
 
 @Component({
   selector: 'app-dish-form',
@@ -31,6 +32,7 @@ export class DishFormComponent implements OnInit {
 
   private readonly router = inject(Router);
   private readonly dishService = inject(DishService);
+  private readonly settingsService = inject(SettingsService);
   private readonly fb = inject(FormBuilder);
 
   readonly asGroup = asGroup;
@@ -55,7 +57,7 @@ export class DishFormComponent implements OnInit {
     const formGroup = this.fb.group({
       name: [ingredient?.name ?? '', [Validators.required, Validators.maxLength(50)]],
       amount: [ingredient?.amount ?? '', Validators.required],
-      unit: [ingredient?.unit ?? 'Piece', Validators.required],
+      unit: [ingredient?.unit ?? this.settingsService.get().defaultUnit, Validators.required],
     });
     this.ingredients.push(formGroup);
   }

@@ -1,19 +1,42 @@
 <div class="flex flex-col justify-center gap-6" [formGroup]="form">
-  <app-toggle-switch formControlName="confirmToRemove"
-                     [label]="'settings.confirmToRemoveLabel' | transloco" />
-  <app-toggle-switch formControlName="darkTheme"
-                     [label]="'settings.darkThemeLabel' | transloco" />
+  <app-toggle-switch
+    formControlName="confirmToRemove"
+    [label]="'settings.confirmToRemoveLabel' | transloco"
+  />
+  <app-toggle-switch formControlName="darkTheme" [label]="'settings.darkThemeLabel' | transloco" />
   <div>
-    <label for="language" class="relative self-center inline-flex items-center cursor-pointer text-gray-700 dark:text-white">
+    <label
+      for="language"
+      class="relative self-center inline-flex items-center cursor-pointer text-gray-700 dark:text-white"
+    >
       {{ 'settings.languageLabel' | transloco }}
     </label>
-    <select id="language" class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
-            formControlName="language">
+    <select
+      id="language"
+      class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+      formControlName="language"
+    >
       @for (lang of languages; track lang.id) {
-        <option [value]="lang.id"
-                [selected]="lang.id === activeLang">
+        <option [value]="lang.id" [selected]="lang.id === activeLang">
           {{ lang.label }}
         </option>
+      }
+    </select>
+  </div>
+  <div>
+    <label
+      for="defaultUnit"
+      class="relative self-center inline-flex items-center cursor-pointer text-gray-700 dark:text-white"
+    >
+      {{ 'settings.defaultUnitLabel' | transloco }}
+    </label>
+    <select
+      id="defaultUnit"
+      class="w-full border bg-white border-gray-300 rounded-xl py-1 px-2"
+      formControlName="defaultUnit"
+    >
+      @for (unit of units; track unit.value) {
+        <option [value]="unit.value">{{ unit.label | transloco }}</option>
       }
     </select>
   </div>

@@ -1,11 +1,7 @@
 import { inject, Service, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 import { STORAGE_KEY } from '../models/storage.model';
-import {
-  LANGUAGES,
-  Settings,
-  SETTINGS_KEYS,
-} from '../../features/settings/models/settings.model';
+import { LANGUAGES, Settings, SETTINGS_KEYS } from '../../features/settings/models/settings.model';
 
 @Service()
 export class SettingsService {
@@ -13,13 +9,17 @@ export class SettingsService {
     [SETTINGS_KEYS.ConfirmToRemove]: true,
     [SETTINGS_KEYS.DarkTheme]: false,
     [SETTINGS_KEYS.Language]: LANGUAGES.English,
+    [SETTINGS_KEYS.DefaultUnit]: 'Piece',
   };
 
   readonly isDarkMode = signal<boolean>(false);
   private readonly storageService = inject(StorageService);
 
-  get(): Settings | null {
-    return this.storageService.get<Settings>(STORAGE_KEY.Settings) ?? this.DEFAULT_SETTINGS;
+  get(): Settings {
+    return {
+      ...this.DEFAULT_SETTINGS,
+      ...this.storageService.get<Partial<Settings>>(STORAGE_KEY.Settings),
+    };
   }
 
   set(settings: Settings): void {

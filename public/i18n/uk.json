@@ -6,7 +6,8 @@
   "settings": {
     "confirmToRemoveLabel": "Підтвердження на видалення (модальне вікно)",
     "darkThemeLabel": "Темна тема",
-    "languageLabel": "Виберіть мову"
+    "languageLabel": "Виберіть мову",
+    "defaultUnitLabel": "Одиниця вимірювання за замовчуванням"
   },
   "cart": {
     "title": "Кошик",

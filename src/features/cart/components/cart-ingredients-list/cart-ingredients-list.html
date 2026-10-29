@@ -50,7 +50,8 @@
           <span class="text-sm text-gray-500">{{ item.sources | appFormatIngredientSources }}</span>
         </div>
         <span class="ml-auto" [ngClass]="item.selected ? 'text-gray-500' : 'text-green-500'"
-          >{{ item.amount }} {{ UNIT_TRANSLATION_KEYS[item.unit] | transloco }}</span
+          >{{ item.amount | number: '1.0-2' }}
+          {{ UNIT_TRANSLATION_KEYS[item.unit] | transloco }}</span
         >
       </li>
     }

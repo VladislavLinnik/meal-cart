@@ -6,7 +6,8 @@
   "settings": {
     "confirmToRemoveLabel": "Confirm before removing (modal window)",
     "darkThemeLabel": "Dark theme",
-    "languageLabel": "Select language"
+    "languageLabel": "Select language",
+    "defaultUnitLabel": "Default unit"
   },
   "cart": {
     "title": "Cart",

@@ -8,6 +8,7 @@ import { ThemeService } from '../../../../core/services/theme.service';
 import { asGroup } from '../../../../core/utils/form.helper';
 import { LangDefinition, TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { distinctUntilChanged } from 'rxjs';
+import { UNIT_TRANSLATION_KEYS } from '../../../../core/models/ingredient.model';
 
 @Component({
   selector: 'app-settings',
@@ -19,9 +20,13 @@ export default class SettingsComponent implements OnInit {
   private readonly themeService = inject(ThemeService);
   private translocoService = inject(TranslocoService);
 
-  private readonly settings: Settings | null = this.settingsService.get();
+  private readonly settings: Settings = this.settingsService.get();
   readonly activeLang = this.translocoService.getActiveLang();
   readonly languages = this.translocoService.getAvailableLangs() as LangDefinition[];
+  readonly units = Object.entries(UNIT_TRANSLATION_KEYS).map(([value, label]) => ({
+    value,
+    label,
+  }));
 
   protected readonly asGroup = asGroup;
 
@@ -31,6 +36,7 @@ export default class SettingsComponent implements OnInit {
     }),
     darkTheme: new FormControl(this.settings?.darkTheme ?? false, { nonNullable: true }),
     language: new FormControl(this.settings?.language ?? LANGUAGES.English, { nonNullable: true }),
+    defaultUnit: new FormControl(this.settings.defaultUnit, { nonNullable: true }),
   });
 
   ngOnInit(): void {
