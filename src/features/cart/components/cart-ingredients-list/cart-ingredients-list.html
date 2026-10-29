@@ -1,11 +1,16 @@
 <div class="flex items-center justify-between mb-5">
   <h2 class="text-lg font-bold">{{ 'cart.shoppingListTitle' | transloco }}</h2>
   @if (cart().length) {
-    <button class="btn items-center py-1 px-3"
-            (click)="changeViewSelected.emit(CART_PAGE_VIEW.Dish)">
-      <ng-icon class="mr-1" name="heroArrowLeft" />
-      {{ 'cart.dishesTitle' | transloco }}
-    </button>
+    <div class="flex items-center gap-2">
+      <app-copy-dishes-button [dishes]="cart()" />
+      <button
+        class="btn items-center py-1 px-3"
+        (click)="changeViewSelected.emit(CART_PAGE_VIEW.Dish)"
+      >
+        <ng-icon class="mr-1" name="heroArrowLeft" />
+        {{ 'cart.dishesTitle' | transloco }}
+      </button>
+    </div>
   }
 </div>
 
@@ -13,36 +18,46 @@
   <app-cart-progress [percent]="progress().percent" class="block mb-5">
     <div class="flex justify-between items-center mb-1 text-sm">
       <span>{{ 'cart.progressLabel' | transloco }}</span>
-      <span><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span> {{ 'cart.purchasedSuffix' | transloco }}</span>
+      <span
+        ><span class="font-bold">{{ progress().selected + '/' + progress().total }}</span>
+        {{ 'cart.purchasedSuffix' | transloco }}</span
+      >
     </div>
   </app-cart-progress>
 
   <ul>
     @for (item of ingredients(); track item.name) {
-      <li class="flex py-4 not-last:border-b border-b-gray-300 cursor-pointer"
-          tabindex="0"
-          [attr.aria-checked]="item.selected"
-          (click)="toggleIngredient(item)"
-          (keydown.enter)="toggleIngredient(item)"
-          (keydown.space)="toggleIngredient(item)">
-        <input class="mr-3 mt-1 pointer-events-none accent-green-400 size-5 text-white"
-               type="checkbox"
-               tabindex="-1"
-               [checked]="item.selected">
+      <li
+        class="flex py-4 not-last:border-b border-b-gray-300 cursor-pointer"
+        tabindex="0"
+        [attr.aria-checked]="item.selected"
+        (click)="toggleIngredient(item)"
+        (keydown.enter)="toggleIngredient(item)"
+        (keydown.space)="toggleIngredient(item)"
+      >
+        <input
+          class="mr-3 mt-1 pointer-events-none accent-green-400 size-5 text-white"
+          type="checkbox"
+          tabindex="-1"
+          [checked]="item.selected"
+        />
         <div class="flex flex-col mr-2">
-          <span class="first-letter:uppercase"
-                [ngClass]="{'line-through text-gray-500': item.selected}">{{ item.name }}</span>
+          <span
+            class="first-letter:uppercase"
+            [ngClass]="{ 'line-through text-gray-500': item.selected }"
+            >{{ item.name }}</span
+          >
           <span class="text-sm text-gray-500">{{ item.sources | appFormatIngredientSources }}</span>
         </div>
-        <span class="ml-auto"
-              [ngClass]="item.selected ? 'text-gray-500': 'text-green-500'">{{ item.amount }} {{ UNIT_TRANSLATION_KEYS[item.unit] | transloco }}</span>
+        <span class="ml-auto" [ngClass]="item.selected ? 'text-gray-500' : 'text-green-500'"
+          >{{ item.amount }} {{ UNIT_TRANSLATION_KEYS[item.unit] | transloco }}</span
+        >
       </li>
     }
   </ul>
 } @else {
   <p class="text-center text-gray-500 text-sm mb-2">{{ 'cart.emptyMessage' | transloco }}</p>
-  <button class="mx-auto btn items-center py-1 px-3"
-          routerLink="dishes">
+  <button class="mx-auto btn items-center py-1 px-3" routerLink="dishes">
     <ng-icon class="mr-1" name="heroPlus" />
     {{ 'cart.addButton' | transloco }}
   </button>

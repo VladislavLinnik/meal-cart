@@ -1,35 +1,43 @@
 <div class="flex items-center justify-between mb-5">
   <h2 class="text-lg font-bold">{{ 'dishes.title' | transloco }}</h2>
   @if (dishService.dishes().length) {
-    <button class="btn items-center py-1 px-3"
-            routerLink="new">
-      <ng-icon class="mr-1" name="heroPlus" />
-      {{ 'dishes.createButton' | transloco }}
-    </button>
+    <div class="flex items-center gap-2">
+      <app-copy-dishes-button [dishes]="dishService.dishes()" />
+      <button class="btn items-center py-1 px-3" routerLink="new">
+        <ng-icon class="mr-1" name="heroPlus" />
+        {{ 'dishes.createButton' | transloco }}
+      </button>
+    </div>
   }
 </div>
 
 @if (dishService.dishes().length) {
-  <input class="w-full border bg-white border-gray-300 rounded-xl py-1 px-4 mb-5" type="text"
-         id="dishSearch"
-         (input)="onSearch($any($event.target).value)"
-         [placeholder]="'dishes.searchPlaceholder' | transloco">
+  <input
+    class="w-full border bg-white border-gray-300 rounded-xl py-1 px-4 mb-5"
+    type="text"
+    id="dishSearch"
+    (input)="onSearch($any($event.target).value)"
+    [placeholder]="'dishes.searchPlaceholder' | transloco"
+  />
   @if (!filteredDishes().length) {
-    <p class="text-center text-gray-500 dark:text-white text-sm">{{ 'dishes.nothingFound' | transloco }}</p>
+    <p class="text-center text-gray-500 dark:text-white text-sm">
+      {{ 'dishes.nothingFound' | transloco }}
+    </p>
   }
 } @else {
   <p class="text-center text-gray-500 text-sm mb-2">{{ 'dishes.emptyStateMessage' | transloco }}</p>
-  <button class="mx-auto btn items-center py-1 px-3"
-          routerLink="new">
+  <button class="mx-auto btn items-center py-1 px-3" routerLink="new">
     <ng-icon class="mr-1" name="heroPlus" />
     {{ 'dishes.createButton' | transloco }}
   </button>
 }
 
 @for (dish of filteredDishes(); track dish.id) {
-  <app-dish-card [dish]="dish"
-                 [isInCart]="cartDishIds().has(dish.id)"
-                 (remove)="remove($event)"
-                 (addToCart)="addToCart($event)"
-                 (removeFromCart)="removeFromCart($event)" />
+  <app-dish-card
+    [dish]="dish"
+    [isInCart]="cartDishIds().has(dish.id)"
+    (remove)="remove($event)"
+    (addToCart)="addToCart($event)"
+    (removeFromCart)="removeFromCart($event)"
+  />
 }

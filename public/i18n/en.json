@@ -60,6 +60,11 @@
     "defaultConfirmText": "Confirm",
     "defaultCancelText": "Cancel"
   },
+  "copy": {
+    "description": "Copy all dishes with their ingredients",
+    "success": "Dishes and ingredients copied",
+    "error": "Could not copy. Allow clipboard access and try again."
+  },
   "units": {
     "kg": "kg",
     "gr": "g",

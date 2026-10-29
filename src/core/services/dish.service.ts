@@ -27,6 +27,7 @@ export class DishService {
     const payload: Dish = { ...dish, id: crypto.randomUUID() };
     this._dishes.update((dishes) => [...dishes, payload]);
     this.saveToStorage();
+    this.cartService.addDish(payload);
   }
 
   updateDish(id: string, dish: Partial<Dish>): void {

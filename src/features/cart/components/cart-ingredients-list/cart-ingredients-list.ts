@@ -1,28 +1,28 @@
-import {
-  Component,
-  computed,
-  inject,
-  output,
-  Signal,
-} from '@angular/core';
+import { Component, computed, inject, output, Signal } from '@angular/core';
 import { CART_PAGE_VIEW, CartPageView } from '../../models/page-view.model';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroArrowLeft } from '@ng-icons/heroicons/outline';
 import { CartProgress } from '../cart-progress/cart-progress';
 import { CartDish } from '../../../../core/models/cart.model';
 import { CartService } from '../../../../core/services/cart.service';
-import {
-  Ingredient,
-  UNIT_TRANSLATION_KEYS,
-} from '../../../../core/models/ingredient.model';
+import { Ingredient, UNIT_TRANSLATION_KEYS } from '../../../../core/models/ingredient.model';
 import { NgClass } from '@angular/common';
 import { FormatIngredientSourcesPipe } from '../../pipes/format-ingredient-sources.pipe';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { CopyDishesButtonComponent } from '../../../../shared/components/copy-dishes-button/copy-dishes-button.component';
 
 @Component({
   selector: 'app-cart-ingredients-list',
-  imports: [NgIcon, CartProgress, NgClass, FormatIngredientSourcesPipe, RouterLink, TranslocoPipe],
+  imports: [
+    NgIcon,
+    CartProgress,
+    NgClass,
+    FormatIngredientSourcesPipe,
+    RouterLink,
+    TranslocoPipe,
+    CopyDishesButtonComponent,
+  ],
   viewProviders: [provideIcons({ heroArrowLeft })],
   templateUrl: './cart-ingredients-list.html',
 })

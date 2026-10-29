@@ -7,10 +7,11 @@ import { CartDish } from '../../../../core/models/cart.model';
 import { RouterLink } from '@angular/router';
 import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { CopyDishesButtonComponent } from '../../../../shared/components/copy-dishes-button/copy-dishes-button.component';
 
 @Component({
   selector: 'app-cart-dishes-list',
-  imports: [NgIcon, RouterLink, TranslocoPipe],
+  imports: [NgIcon, RouterLink, TranslocoPipe, CopyDishesButtonComponent],
   viewProviders: [provideIcons({ heroArrowRight, heroMinus, heroPlus, heroTrash })],
   templateUrl: './cart-dishes-list.html',
 })

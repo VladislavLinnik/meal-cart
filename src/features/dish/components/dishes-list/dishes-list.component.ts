@@ -10,10 +10,11 @@ import { CartService } from '../../../../core/services/cart.service';
 import { DishCardComponent } from '../dish-card/dish-card.component';
 import { injectConfirmChecker } from '../../../../core/utils/confirm-checker';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { CopyDishesButtonComponent } from '../../../../shared/components/copy-dishes-button/copy-dishes-button.component';
 
 @Component({
   selector: 'app-dishes-list',
-  imports: [NgIcon, RouterLink, DishCardComponent, TranslocoPipe],
+  imports: [NgIcon, RouterLink, DishCardComponent, TranslocoPipe, CopyDishesButtonComponent],
   templateUrl: './dishes-list.component.html',
   viewProviders: [provideIcons({ heroPencil, heroTrash, heroPlus })],
 })

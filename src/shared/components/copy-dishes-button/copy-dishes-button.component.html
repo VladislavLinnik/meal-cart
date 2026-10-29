@@ -1,0 +1,38 @@
+<div class="relative">
+  <button
+    type="button"
+    class="btn size-8 items-center justify-center"
+    [disabled]="copying() || !dishes().length"
+    [attr.aria-label]="'copy.description' | transloco"
+    [title]="(status() === 'idle' ? 'copy.description' : 'copy.' + status()) | transloco"
+    (click)="copy()"
+  >
+    <ng-icon
+      aria-hidden="true"
+      [class.text-green-600]="status() === 'success'"
+      [class.text-red-600]="status() === 'error'"
+      [name]="
+        status() === 'success'
+          ? 'heroCheck'
+          : status() === 'error'
+            ? 'heroExclamationTriangle'
+            : 'heroClipboardDocument'
+      "
+    />
+  </button>
+  <span
+    role="status"
+    aria-live="polite"
+    [class]="
+      status() === 'error'
+        ? 'absolute right-0 top-full z-10 mt-2 w-64 rounded-lg border border-red-200 bg-white p-2 text-sm text-red-600 shadow'
+        : 'sr-only'
+    "
+  >
+    @if (status() === 'success') {
+      {{ 'copy.success' | transloco }}
+    } @else if (status() === 'error') {
+      {{ 'copy.error' | transloco }}
+    }
+  </span>
+</div>
